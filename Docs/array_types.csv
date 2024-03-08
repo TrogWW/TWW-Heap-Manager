@@ -1,0 +1,817 @@
+Array Name,Component Data Type,DataStructType,Number of Elements
+@class$4017d_camera_cpp[2],@class$4017d_camera_cpp,Structure,2
+ActorModeTable[10],ActorModeTable,Structure,10
+ActorModeTable[11],ActorModeTable,Structure,11
+ActorModeTable[13],ActorModeTable,Structure,13
+ActorModeTable[1],ActorModeTable,Structure,1
+ActorModeTable[2],ActorModeTable,Structure,2
+ActorModeTable[3],ActorModeTable,Structure,3
+ActorModeTable[7],ActorModeTable,Structure,7
+ActorModeTable[8],ActorModeTable,Structure,8
+Anm_c[140],Anm_c,Structure,140
+Anm_c[72],Anm_c,Structure,72
+BgcSrc_c[20],BgcSrc_c,Structure,20
+BgcSrc_c[23],BgcSrc_c,Structure,23
+BgcSrc_c[5],BgcSrc_c,Structure,5
+CButton[4],CButton,Structure,4
+CLOUD_EFF[100],CLOUD_EFF,Structure,100
+CStick[4],CStick,Structure,4
+CTime[8],CTime,Structure,8
+CardBlockData[2],CardBlockData,Structure,2
+DynamicModuleControl *[2],DynamicModuleControl *,Pointer,2
+DynamicModuleControl *[501],DynamicModuleControl *,Pointer,501
+DynamicNameTableEntry[430],DynamicNameTableEntry,Structure,430
+EffSmokeCB[2],EffSmokeCB,Structure,2
+FmapChkPnt[49],FmapChkPnt,Structure,49
+GXColor[1],GXColor,TypeDef,1
+GXTexRegion *[8],GXTexRegion *,Pointer,8
+GXTexRegion[8],GXTexRegion,TypeDef,8
+GameStartCheckData[5],GameStartCheckData,Structure,5
+GameStartCheckData[6],GameStartCheckData,Structure,6
+HOUSI_EFF[300],HOUSI_EFF,Structure,300
+HeapCheck * *[6],HeapCheck * *,Pointer,6
+Item_set_pos_data *[9],Item_set_pos_data *,Pointer,9
+J2DPane *[5],J2DPane *,Pointer,5
+J2DPane *[6],J2DPane *,Pointer,6
+J2DPicture *[4],J2DPicture *,Pointer,4
+J2DPicture *[8],J2DPicture *,Pointer,8
+J2DTextBox *[3],J2DTextBox *,Pointer,3
+J3DAnmColor *[10],J3DAnmColor *,Pointer,10
+J3DAnmColor *[1],J3DAnmColor *,Pointer,1
+J3DAnmKeyTableBase *[4],J3DAnmKeyTableBase *,Pointer,4
+J3DAnmKeyTableBase[4],J3DAnmKeyTableBase,Structure,4
+J3DColorChan[2],J3DColorChan,Structure,2
+J3DColorChan[4],J3DColorChan,Structure,4
+J3DDrawBuffer *[2],J3DDrawBuffer *,Pointer,2
+J3DFrameCtrl[2],J3DFrameCtrl,Structure,2
+J3DFrameCtrl[3],J3DFrameCtrl,Structure,3
+J3DGXColor[2],J3DGXColor,TypeDef,2
+J3DGXColor[4],J3DGXColor,TypeDef,4
+J3DLightObj *[8],J3DLightObj *,Pointer,8
+J3DLightObj[2],J3DLightObj,Structure,2
+J3DMatColorAnm *[2],J3DMatColorAnm *,Pointer,2
+J3DMaterialAnm *[1],J3DMaterialAnm *,Pointer,1
+J3DModel *[20],J3DModel *,Pointer,20
+J3DModel *[26],J3DModel *,Pointer,26
+J3DModel *[2],J3DModel *,Pointer,2
+J3DModel *[32],J3DModel *,Pointer,32
+J3DModel *[3],J3DModel *,Pointer,3
+J3DModel *[4],J3DModel *,Pointer,4
+J3DModel *[50],J3DModel *,Pointer,50
+J3DModel *[5],J3DModel *,Pointer,5
+J3DMtxCalc *[2],J3DMtxCalc *,Pointer,2
+J3DShape *[4],J3DShape *,Pointer,4
+J3DTevColorAnm *[4],J3DTevColorAnm *,Pointer,4
+J3DTevKColorAnm *[4],J3DTevKColorAnm *,Pointer,4
+J3DTevOrder[8],J3DTevOrder,TypeDef,8
+J3DTevStage[8],J3DTevStage,Structure,8
+J3DTexMtxAnm *[8],J3DTexMtxAnm *,Pointer,8
+J3DTexNoAnm *[8],J3DTexNoAnm *,Pointer,8
+JAIAnimeSound__Slot[1],JAIAnimeSound__Slot,Structure,1
+JAIAnimeSound__Slot[8],JAIAnimeSound__Slot,Structure,8
+JKRAramHeap *[3],JKRAramHeap *,Pointer,3
+JKRAramHeap *[6],JKRAramHeap *,Pointer,6
+JKRExpHeap *[101],JKRExpHeap *,Pointer,101
+JKRHeap *[100],JKRHeap *,Pointer,100
+JKRHeap *[101],JKRHeap *,Pointer,101
+JKRHeap *[64],JKRHeap *,Pointer,64
+JKRHeap *[6],JKRHeap *,Pointer,6
+JKRHeap *[80],JKRHeap *,Pointer,80
+JKRHeap *[90],JKRHeap *,Pointer,90
+JKRSolidHeap *[2],JKRSolidHeap *,Pointer,2
+JPABaseEmitter *[10],JPABaseEmitter *,Pointer,10
+JPADrawCalcEmitterVisitor *[1],JPADrawCalcEmitterVisitor *,Pointer,1
+JPADrawCalcEmitterVisitor *[2],JPADrawCalcEmitterVisitor *,Pointer,2
+JPADrawCalcEmitterVisitor *[5],JPADrawCalcEmitterVisitor *,Pointer,5
+JPADrawCalcEmitterVisitor *[7],JPADrawCalcEmitterVisitor *,Pointer,7
+JPADrawExecEmitterVisitor *[1],JPADrawExecEmitterVisitor *,Pointer,1
+JPADrawExecEmitterVisitor *[3],JPADrawExecEmitterVisitor *,Pointer,3
+JPADrawExecEmitterVisitor *[5],JPADrawExecEmitterVisitor *,Pointer,5
+JPADrawExecEmitterVisitor *[7],JPADrawExecEmitterVisitor *,Pointer,7
+JPADrawExecParticleVisitor *[10],JPADrawExecParticleVisitor *,Pointer,10
+JPADrawExecParticleVisitor *[15],JPADrawExecParticleVisitor *,Pointer,15
+JPADrawExecParticleVisitor *[1],JPADrawExecParticleVisitor *,Pointer,1
+JPADrawExecParticleVisitor *[2],JPADrawExecParticleVisitor *,Pointer,2
+JPADrawExecParticleVisitor *[3],JPADrawExecParticleVisitor *,Pointer,3
+JPADrawExecParticleVisitor *[4],JPADrawExecParticleVisitor *,Pointer,4
+JPADrawExecParticleVisitor *[5],JPADrawExecParticleVisitor *,Pointer,5
+JPADrawExecParticleVisitor *[6],JPADrawExecParticleVisitor *,Pointer,6
+JSUPtrList[16],JSUPtrList,Structure,16
+JUTFont *[2],JUTFont *,Pointer,2
+JUTGamePad *[2],JUTGamePad *,Pointer,2
+JUTGamePad *[4],JUTGamePad *,Pointer,4
+JUTGamePad[4],JUTGamePad,Structure,4
+JUTTexture *[2],JUTTexture *,Pointer,2
+JUTTexture *[3],JUTTexture *,Pointer,3
+JUTTexture *[4],JUTTexture *,Pointer,4
+JUTTexture *[5],JUTTexture *,Pointer,5
+KAMOME_EFF[10],KAMOME_EFF,Structure,10
+LIGHT_INFLUENCE * *[200],LIGHT_INFLUENCE * *,Pointer,200
+LIGHT_INFLUENCE *[10],LIGHT_INFLUENCE *,Pointer,10
+LIGHT_INFLUENCE *[200],LIGHT_INFLUENCE *,Pointer,200
+LIGHT_INFLUENCE[30],LIGHT_INFLUENCE,Structure,30
+MTX34 * * *[2],MTX34 * * *,Pointer,2
+MTX34 * *[2],MTX34 * *,Pointer,2
+MTX34 *[3],MTX34 *,Pointer,3
+MTX34[2],MTX34,Structure,2
+MTX34[4],MTX34,Structure,4
+MTX34[5],MTX34,Structure,5
+MTX34[6],MTX34,Structure,6
+OSMessage[1],OSMessage,TypeDef,1
+OSMessage[4],OSMessage,TypeDef,4
+PADStatus[4],PADStatus,Structure,4
+POISON_EFF[1000],POISON_EFF,Structure,1000
+PTMF[10],PTMF,Structure,10
+PTMF[120],PTMF,Structure,120
+PTMF[13],PTMF,Structure,13
+PTMF[150],PTMF,Structure,150
+PTMF[15],PTMF,Structure,15
+PTMF[16],PTMF,Structure,16
+PTMF[178],PTMF,Structure,178
+PTMF[180],PTMF,Structure,180
+PTMF[18],PTMF,Structure,18
+PTMF[19],PTMF,Structure,19
+PTMF[20],PTMF,Structure,20
+PTMF[210],PTMF,Structure,210
+PTMF[22],PTMF,Structure,22
+PTMF[250],PTMF,Structure,250
+PTMF[280],PTMF,Structure,280
+PTMF[287],PTMF,Structure,287
+PTMF[291],PTMF,Structure,291
+PTMF[2],PTMF,Structure,2
+PTMF[3],PTMF,Structure,3
+PTMF[4],PTMF,Structure,4
+PTMF[50],PTMF,Structure,50
+PTMF[5],PTMF,Structure,5
+PTMF[6],PTMF,Structure,6
+PTMF[70],PTMF,Structure,70
+PTMF[75],PTMF,Structure,75
+PTMF[7],PTMF,Structure,7
+PTMF[80],PTMF,Structure,80
+PTMF_0x10[178],PTMF_0x10,Structure,178
+PTMF_0x10[200],PTMF_0x10,Structure,200
+PTMF_0x10[210],PTMF_0x10,Structure,210
+PTMF_0x10[215],PTMF_0x10,Structure,215
+PTMF_0x10[218],PTMF_0x10,Structure,218
+PTMF_0x10[219],PTMF_0x10,Structure,219
+Quaternion *[15],Quaternion *,Pointer,15
+Quaternion[14],Quaternion,Structure,14
+Quaternion[2],Quaternion,Structure,2
+RAIN_EFF[250],RAIN_EFF,Structure,250
+ResTIMG *[2],ResTIMG *,Pointer,2
+ResTIMG *[3],ResTIMG *,Pointer,3
+Room_c[64],Room_c,Structure,64
+SNOW_EFF[250],SNOW_EFF,Structure,250
+STAR_EFF[1],STAR_EFF,Structure,1
+TColor[4],TColor,TypeDef,4
+TVec2<float><float>[4],TVec2<float><float>,Structure,4
+TVec3<float>[4],TVec3<float>,Structure,4
+TVec3<float>[8],TVec3<float>,Structure,8
+TerminatedCString *[19],TerminatedCString *,Pointer,19
+TerminatedCString *[4],TerminatedCString *,Pointer,4
+TerminatedCString *[8],TerminatedCString *,Pointer,8
+Type_Attr[13],Type_Attr,Structure,13
+Unit_c[200],Unit_c,Structure,200
+Unit_c[396],Unit_c,Structure,396
+VRKUMO_EFF[100],VRKUMO_EFF,Structure,100
+Vec[0][2],Vec[2],Array,0
+Vec[12],Vec,Structure,12
+Vec[2],Vec,Structure,2
+Vec[3],Vec,Structure,3
+Vec[3][2],Vec[2],Array,3
+Vec[3][4],Vec[4],Array,3
+Vec[4],Vec,Structure,4
+Vec[6],Vec,Structure,6
+WAVE_EFF[300],WAVE_EFF,Structure,300
+WIND_EFF[30],WIND_EFF,Structure,30
+WIND_INFLUENCE *[15],WIND_INFLUENCE *,Pointer,15
+WIND_INFLUENCE *[30],WIND_INFLUENCE *,Pointer,30
+WIND_INFLUENCE[3],WIND_INFLUENCE,Structure,3
+WIND_INF_ENTITY[5],WIND_INF_ENTITY,Structure,5
+_GXColorS10[2],_GXColorS10,Structure,2
+_GXColorS10[3],_GXColorS10,Structure,3
+_GXColorS10[4],_GXColorS10,Structure,4
+_GXColor[1],_GXColor,Structure,1
+_GXColor[2],_GXColor,Structure,2
+_GXColor[3],_GXColor,Structure,3
+_GXColor[4],_GXColor,Structure,4
+_GXColor[5],_GXColor,Structure,5
+_GXColor[8],_GXColor,Structure,8
+_GXFogAdjTable[2],_GXFogAdjTable,Structure,2
+__jnt_hit_data_c[16],__jnt_hit_data_c,Structure,16
+__jnt_hit_data_c[19],__jnt_hit_data_c,Structure,19
+__jnt_hit_data_c[20],__jnt_hit_data_c,Structure,20
+__jnt_hit_data_c[21],__jnt_hit_data_c,Structure,21
+__jnt_hit_data_c[22],__jnt_hit_data_c,Structure,22
+__jnt_hit_data_c[2],__jnt_hit_data_c,Structure,2
+__shop_items_set_data * *[9],__shop_items_set_data * *,Pointer,9
+__shop_items_set_data *[13],__shop_items_set_data *,Pointer,13
+__shop_items_set_data *[3],__shop_items_set_data *,Pointer,3
+__shop_items_set_data *[4],__shop_items_set_data *,Pointer,4
+bgn3_ke_s[40],bgn3_ke_s,Structure,40
+br_s[1052],br_s,Structure,1052
+br_s[50],br_s,Structure,50
+byte[10],byte,Unknown,10
+byte[112],byte,Unknown,112
+byte[12],byte,Unknown,12
+byte[16],byte,Unknown,16
+byte[1904],byte,Unknown,1904
+byte[1],byte,Unknown,1
+byte[20],byte,Unknown,20
+byte[21],byte,Unknown,21
+byte[256],byte,Unknown,256
+byte[2],byte,Unknown,2
+byte[2][3],byte[3],Array,2
+byte[32],byte,Unknown,32
+byte[36],byte,Unknown,36
+byte[38],byte,Unknown,38
+byte[39],byte,Unknown,39
+byte[3],byte,Unknown,3
+byte[3][2],byte[2],Array,3
+byte[470],byte,Unknown,470
+byte[4],byte,Unknown,4
+byte[5],byte,Unknown,5
+byte[64],byte,Unknown,64
+byte[6],byte,Unknown,6
+byte[7],byte,Unknown,7
+byte[8192],byte,Unknown,8192
+byte[8],byte,Unknown,8
+byte[9],byte,Unknown,9
+byte[9][9],byte[9],Array,9
+cBgS_ChkElm[256],cBgS_ChkElm,Structure,256
+cCcD_Obj *[1280],cCcD_Obj *,Pointer,1280
+cCcD_Obj *[256],cCcD_Obj *,Pointer,256
+cCcD_Obj *[768],cCcD_Obj *,Pointer,768
+cCcD_Obj__DamageTypes[6],cCcD_Obj__DamageTypes,Enum,6
+cPhs__Handler *[2],cPhs__Handler *,Pointer,2
+cXy *[2],cXy *,Pointer,2
+cXy[12],cXy,Structure,12
+cXy[20],cXy,Structure,20
+cXy[30],cXy,Structure,30
+cXy[3],cXy,Structure,3
+cXy[4],cXy,Structure,4
+cXy[5],cXy,Structure,5
+cXyz *[10],cXyz *,Pointer,10
+cXyz *[2],cXyz *,Pointer,2
+cXyz[10],cXyz,Structure,10
+cXyz[12],cXyz,Structure,12
+cXyz[14],cXyz,Structure,14
+cXyz[1],cXyz,Structure,1
+cXyz[200],cXyz,Structure,200
+cXyz[20],cXyz,Structure,20
+cXyz[21],cXyz,Structure,21
+cXyz[23],cXyz,Structure,23
+cXyz[24],cXyz,Structure,24
+cXyz[2],cXyz,Structure,2
+cXyz[2][2],cXyz[2],Array,2
+cXyz[2][3],cXyz[3],Array,2
+cXyz[30],cXyz,Structure,30
+cXyz[3],cXyz,Structure,3
+cXyz[3][2],cXyz[2],Array,3
+cXyz[42],cXyz,Structure,42
+cXyz[4],cXyz,Structure,4
+cXyz[4][1],cXyz[1],Array,4
+cXyz[4][2],cXyz[2],Array,4
+cXyz[50],cXyz,Structure,50
+cXyz[5],cXyz,Structure,5
+cXyz[60],cXyz,Structure,60
+cXyz[64],cXyz,Structure,64
+cXyz[6],cXyz,Structure,6
+cXyz[8],cXyz,Structure,8
+camera_class *[2],camera_class *,Pointer,2
+card_direntry[128],card_direntry,Structure,128
+card_savedata[3],card_savedata,Structure,3
+card_workarea[2],card_workarea,Structure,2
+char *[0],char *,Pointer,0
+char *[10],char *,Pointer,10
+char *[19],char *,Pointer,19
+char *[1],char *,Pointer,1
+char *[20],char *,Pointer,20
+char *[2],char *,Pointer,2
+char *[3],char *,Pointer,3
+char *[4],char *,Pointer,4
+char *[5],char *,Pointer,5
+char *[8],char *,Pointer,8
+char[10],char,Unknown,10
+char[120],char,Unknown,120
+char[14],char,Unknown,14
+char[15],char,Unknown,15
+char[16],char,Unknown,16
+char[17],char,Unknown,17
+char[1],char,Unknown,1
+char[20],char,Unknown,20
+char[24],char,Unknown,24
+char[256],char,Unknown,256
+char[25],char,Unknown,25
+char[28],char,Unknown,28
+char[2],char,Unknown,2
+char[30],char,Unknown,30
+char[32],char,Unknown,32
+char[3],char,Unknown,3
+char[40],char,Unknown,40
+char[4],char,Unknown,4
+char[4][10],char[10],Array,4
+char[4][20],char[20],Array,4
+char[4][30],char[30],Array,4
+char[4][6],char[6],Array,4
+char[64],char,Unknown,64
+char[6],char,Unknown,6
+char[8],char,Unknown,8
+char[9],char,Unknown,9
+csXyz[10],csXyz,Structure,10
+csXyz[14],csXyz,Structure,14
+csXyz[16],csXyz,Structure,16
+csXyz[20],csXyz,Structure,20
+csXyz[26],csXyz,Structure,26
+csXyz[2],csXyz,Structure,2
+csXyz[3],csXyz,Structure,3
+csXyz[4],csXyz,Structure,4
+csXyz[7],csXyz,Structure,7
+csXyz[8],csXyz,Structure,8
+dAttDraw_c[2],dAttDraw_c,Structure,2
+dAttList_c[4],dAttList_c,Structure,4
+dAttList_c[8],dAttList_c,Structure,8
+dAttLook_c[2],dAttLook_c,Structure,2
+dAttention__DistTableEntry[100],dAttention__DistTableEntry,Structure,100
+dAttention__DistTableEntry[150],dAttention__DistTableEntry,Structure,150
+dAttention__DistTableEntry[180],dAttention__DistTableEntry,Structure,180
+dAttention__DistTableEntry[185],dAttention__DistTableEntry,Structure,185
+dAttention__DistTableEntry[186],dAttention__DistTableEntry,Structure,186
+dAttention__DistTableEntry[190],dAttention__DistTableEntry,Structure,190
+dAttention__DistTableEntry[1],dAttention__DistTableEntry,Structure,1
+dAttention__DistTableEntry[50],dAttention__DistTableEntry,Structure,50
+dAttention__TypeTableEntry[3],dAttention__TypeTableEntry,Structure,3
+dAttention__TypeTableEntry[5],dAttention__TypeTableEntry,Structure,5
+dBgS_AcchCir[1],dBgS_AcchCir,Structure,1
+dBgS_AcchCir[2],dBgS_AcchCir,Structure,2
+dBgS_AcchCir[3],dBgS_AcchCir,Structure,3
+dBgS_GndChk[23],dBgS_GndChk,Structure,23
+dBgS_ObjLinChk[23],dBgS_ObjLinChk,Structure,23
+dBgS_SplGrpChk[1],dBgS_SplGrpChk,Structure,1
+dBgW *[5],dBgW *,Pointer,5
+dBgW *[6],dBgW *,Pointer,6
+dCamera__EventParam[8],dCamera__EventParam,Structure,8
+dCamera__Style[145],dCamera__Style,Structure,145
+dCamera__Type[16],dCamera__Type,Structure,16
+dCamera__Type[1],dCamera__Type,Structure,1
+dCamera__Type[20],dCamera__Type,Structure,20
+dCamera__Type[24],dCamera__Type,Structure,24
+dCamera__Type[40],dCamera__Type,Structure,40
+dCamera__Type[5],dCamera__Type,Structure,5
+dCamera__Type[63],dCamera__Type,Structure,63
+dCcD_Cps[3],dCcD_Cps,Structure,3
+dCcD_Cps[4],dCcD_Cps,Structure,4
+dCcD_Cyl[1],dCcD_Cyl,Structure,1
+dCcD_Cyl[2],dCcD_Cyl,Structure,2
+dCcD_Cyl[5],dCcD_Cyl,Structure,5
+dCcD_Sph[5],dCcD_Sph,Structure,5
+dCcD_Sph[7],dCcD_Sph,Structure,7
+dCcD_Sph[9],dCcD_Sph,Structure,9
+dCcD_Stts[5],dCcD_Stts,Structure,5
+dCcD_Tri *[2],dCcD_Tri *,Pointer,2
+dCcD_Tri[2],dCcD_Tri,Structure,2
+dCcMassS_Obj[2],dCcMassS_Obj,Structure,2
+dCcMassS_Obj[5],dCcMassS_Obj,Structure,5
+dComIfG_camera_info_class[1],dComIfG_camera_info_class,Structure,1
+dDemo_actor_c *[32],dDemo_actor_c *,Pointer,32
+dDemo_actor_c *[33],dDemo_actor_c *,Pointer,33
+dDemo_light_c *[2],dDemo_light_c *,Pointer,2
+dDemo_light_c *[8],dDemo_light_c *,Pointer,8
+dDetectPlace_c[1],dDetectPlace_c,Structure,1
+dDlst_2DObject_c *[2],dDlst_2DObject_c *,Pointer,2
+dDlst_2DObject_c *[3],dDlst_2DObject_c *,Pointer,3
+dDlst_2dm__Tex[2],dDlst_2dm__Tex,Structure,2
+dDlst_base_c *[2],dDlst_base_c *,Pointer,2
+dDlst_base_c *[32],dDlst_base_c *,Pointer,32
+dDlst_base_c *[4],dDlst_base_c *,Pointer,4
+dDlst_base_c *[64],dDlst_base_c *,Pointer,64
+dDlst_list_c *[2],dDlst_list_c *,Pointer,2
+dDlst_peekZ_c__Entry[50],dDlst_peekZ_c__Entry,Structure,50
+dDlst_shadowReal_c[8],dDlst_shadowReal_c,Structure,8
+dDlst_shadowSimple_c[128],dDlst_shadowSimple_c,Structure,128
+dDlst_shadowTri_c[256],dDlst_shadowTri_c,Structure,256
+dDlst_window_c[1],dDlst_window_c,Structure,1
+dEvt_order_c[8],dEvt_order_c,Structure,8
+dGrass_anm_c[104],dGrass_anm_c,Structure,104
+dGrass_data_c[1500],dGrass_data_c,Structure,1500
+dGrass_room_c[64],dGrass_room_c,Structure,64
+dItem_data__ItemNo[21],dItem_data__ItemNo,Enum,21
+dItem_data__ItemNo[3],dItem_data__ItemNo,Enum,3
+dItem_data__ItemNo[4],dItem_data__ItemNo,Enum,4
+dItem_data_field_item_res[256],dItem_data_field_item_res,Structure,256
+dItem_data_item_info[256],dItem_data_item_info,Structure,256
+dItem_data_item_resource[256],dItem_data_item_resource,Structure,256
+dKy_setLight__Status[8],dKy_setLight__Status,Structure,8
+dLib_anm_prm_c[12],dLib_anm_prm_c,Structure,12
+dLib_anm_prm_c[14],dLib_anm_prm_c,Structure,14
+dLib_anm_prm_c[15],dLib_anm_prm_c,Structure,15
+dLib_anm_prm_c[4],dLib_anm_prm_c,Structure,4
+dLib_anm_prm_c[5],dLib_anm_prm_c,Structure,5
+dLib_anm_prm_c[8],dLib_anm_prm_c,Structure,8
+dMagma_floor_c[8],dMagma_floor_c,Structure,8
+dMagma_room_c[4],dMagma_room_c,Structure,4
+dMagma_room_c[64],dMagma_room_c,Structure,64
+dMap_RoomInfo_c *[1],dMap_RoomInfo_c *,Pointer,1
+dMap_RoomInfo_c[1],dMap_RoomInfo_c,Structure,1
+dMap__CollectPointData[20],dMap__CollectPointData,Structure,20
+dMap__CollectPointData[64],dMap__CollectPointData,Structure,64
+dMeter__actTbl[63],dMeter__actTbl,Structure,63
+dPa_cutTurnEcallBack_c[2],dPa_cutTurnEcallBack_c,Structure,2
+dPa_cutTurnEcallBack_c[3],dPa_cutTurnEcallBack_c,Structure,3
+dPa_followEcallBack[2],dPa_followEcallBack,Structure,2
+dPa_followEcallBack[3],dPa_followEcallBack,Structure,3
+dPa_selectTexEcallBack *[4],dPa_selectTexEcallBack *,Pointer,4
+dPa_simpleData_c[32],dPa_simpleData_c,Structure,32
+dPa_simpleEcallBack[25],dPa_simpleEcallBack,Structure,25
+dPa_smokeEcallBack[4],dPa_smokeEcallBack,Structure,4
+dPa_smokeEcallBack[7],dPa_smokeEcallBack,Structure,7
+dRes_control_c[64],dRes_control_c,Structure,64
+dRes_info_c[64],dRes_info_c,Structure,64
+dSalvage_info_c[160],dSalvage_info_c,Structure,160
+dScnPly_reg_childHIO_c[22],dScnPly_reg_childHIO_c,Structure,22
+dSnap__CharaData[132],dSnap__CharaData,Structure,132
+dSnap__CharaData[133],dSnap__CharaData,Structure,133
+dSnap__CharaData[134],dSnap__CharaData,Structure,134
+dStage__ObjectNameTable[100],dStage__ObjectNameTable,Structure,100
+dStage__ObjectNameTable[150],dStage__ObjectNameTable,Structure,150
+dStage__ObjectNameTable[200],dStage__ObjectNameTable,Structure,200
+dStage__ObjectNameTable[300],dStage__ObjectNameTable,Structure,300
+dStage__ObjectNameTable[320],dStage__ObjectNameTable,Structure,320
+dStage__ObjectNameTable[500],dStage__ObjectNameTable,Structure,500
+dStage__ObjectNameTable[600],dStage__ObjectNameTable,Structure,600
+dStage__ObjectNameTable[650],dStage__ObjectNameTable,Structure,650
+dStage__ObjectNameTable[670],dStage__ObjectNameTable,Structure,670
+dStage__ObjectNameTable[675],dStage__ObjectNameTable,Structure,675
+dStage__ObjectNameTable[678],dStage__ObjectNameTable,Structure,678
+dStage__ObjectNameTable[680],dStage__ObjectNameTable,Structure,680
+dStage__ObjectNameTable[700],dStage__ObjectNameTable,Structure,700
+dStage__ObjectNameTable[825],dStage__ObjectNameTable,Structure,825
+dStage_darkStatus_c[2],dStage_darkStatus_c,Structure,2
+dStage_darkStatus_c[3],dStage_darkStatus_c,Structure,3
+dStage_darkStatus_c[4],dStage_darkStatus_c,Structure,4
+dStage_darkStatus_c[6],dStage_darkStatus_c,Structure,6
+dStage_darkStatus_c[8],dStage_darkStatus_c,Structure,8
+dStage_dt__FuncTable[1],dStage_dt__FuncTable,Structure,1
+dStage_dt__FuncTable[22],dStage_dt__FuncTable,Structure,22
+dStage_dt__FuncTable[34],dStage_dt__FuncTable,Structure,34
+dStage_dt__FuncTable[3],dStage_dt__FuncTable,Structure,3
+dStage_dt__FuncTable[7],dStage_dt__FuncTable,Structure,7
+dStage_roomDt_c *[64],dStage_roomDt_c *,Pointer,64
+dStage_roomStatus_c[64],dStage_roomStatus_c,Structure,64
+dSv_memory_c[16],dSv_memory_c,Structure,16
+dSv_player_status_c_c[4],dSv_player_status_c_c,Structure,4
+dSv_zone_c[32],dSv_zone_c,Structure,32
+dTree_anm_c[72],dTree_anm_c,Structure,72
+dTree_data_c[64],dTree_data_c,Structure,64
+dTree_room_c[64],dTree_room_c,Structure,64
+d_a_tsubo__Param[11],d_a_tsubo__Param,Structure,11
+d_a_tsubo__Param[12],d_a_tsubo__Param,Structure,12
+d_a_tsubo__Param[14],d_a_tsubo__Param,Structure,14
+d_a_tsubo__Param[16],d_a_tsubo__Param,Structure,16
+d_a_tsubo__Param[1],d_a_tsubo__Param,Structure,1
+daAuction__ItemData[2],daAuction__ItemData,Structure,2
+daAuction__ItemData[4],daAuction__ItemData,Structure,4
+daBg___Bg[4],daBg___Bg,Structure,4
+daMajuu_Flag_HIO_c[1],daMajuu_Flag_HIO_c,Structure,1
+daNpcPeople_c__l_npc_dat *[19][2],daNpcPeople_c__l_npc_dat *[2],Array,19
+daNpcPeople_c__l_npc_dat *[2],daNpcPeople_c__l_npc_dat *,Pointer,2
+daNpc_Bm1_childHIO_c[10],daNpc_Bm1_childHIO_c,Structure,10
+daNpc_Bm1_childHIO_c__PrmTbl[10],daNpc_Bm1_childHIO_c__PrmTbl,Structure,10
+daNpc_Wind_Eff[4],daNpc_Wind_Eff,Structure,4
+daNpc_Wind_Eff[5],daNpc_Wind_Eff,Structure,5
+daObjFigure__DatTbl[132],daObjFigure__DatTbl,Structure,132
+daObjFigure__DatTbl[134],daObjFigure__DatTbl,Structure,134
+daObjFlame__attr[3],daObjFlame__attr,Structure,3
+daObjFlame__attr[4],daObjFlame__attr,Structure,4
+daPy_anmHeap_c[1],daPy_anmHeap_c,Structure,1
+daPy_anmHeap_c[2],daPy_anmHeap_c,Structure,2
+daPy_anmHeap_c[3],daPy_anmHeap_c,Structure,3
+daPy_anmHeap_c[5],daPy_anmHeap_c,Structure,5
+daPy_anmIndex_c[100],daPy_anmIndex_c,Structure,100
+daPy_anmIndex_c[128],daPy_anmIndex_c,Structure,128
+daPy_anmIndex_c[129],daPy_anmIndex_c,Structure,129
+daPy_anmIndex_c[144],daPy_anmIndex_c,Structure,144
+daPy_anmIndex_c[150],daPy_anmIndex_c,Structure,150
+daPy_anmIndex_c[1],daPy_anmIndex_c,Structure,1
+daPy_anmIndex_c[64],daPy_anmIndex_c,Structure,64
+daPy_anmIndex_c[65],daPy_anmIndex_c,Structure,65
+daPy_anmIndex_c[66],daPy_anmIndex_c,Structure,66
+daPy_anmIndex_c[67],daPy_anmIndex_c,Structure,67
+daPy_aura_c[6],daPy_aura_c,Structure,6
+daPy_dmEcallBack_c[4],daPy_dmEcallBack_c,Structure,4
+daPy_footData_c[2],daPy_footData_c,Structure,2
+daPy_footEffect_c[2],daPy_footEffect_c,Structure,2
+daPy_lk_c *[1],daPy_lk_c *,Pointer,1
+daPy_matAnm_c *[10],daPy_matAnm_c *,Pointer,10
+daPy_matAnm_c *[1],daPy_matAnm_c *,Pointer,1
+daPy_matAnm_c *[2],daPy_matAnm_c *,Pointer,2
+daPy_matAnm_c *[8],daPy_matAnm_c *,Pointer,8
+daPy_mtxPosFollowEcallBack_c[2],daPy_mtxPosFollowEcallBack_c,Structure,2
+daPy_py_c *[1],daPy_py_c *,Pointer,1
+daPy_py_c__PlayerAttackState[6],daPy_py_c__PlayerAttackState,Enum,6
+daPy_swimTailEcallBack_c[2],daPy_swimTailEcallBack_c,Structure,2
+daPy_waterDropEcallBack_c[2],daPy_waterDropEcallBack_c,Structure,2
+daSea_WaveInfo__Table[2],daSea_WaveInfo__Table,Structure,2
+daSea_WaveInfo__Table[4],daSea_WaveInfo__Table,Structure,4
+ep_ga_s[2],ep_ga_s,Structure,2
+f32[12],f32,TypeDef,12
+f32[24],f32,TypeDef,24
+f32[28],f32,TypeDef,28
+f32[2],f32,TypeDef,2
+f32[3],f32,TypeDef,3
+f32[6],f32,TypeDef,6
+f32[7],f32,TypeDef,7
+float *[3],float *,Pointer,3
+float[100],float,Unknown,100
+float[10],float,Unknown,10
+float[11],float,Unknown,11
+float[120],float,Unknown,120
+float[12],float,Unknown,12
+float[130],float,Unknown,130
+float[133],float,Unknown,133
+float[14],float,Unknown,14
+float[15],float,Unknown,15
+float[16],float,Unknown,16
+float[18],float,Unknown,18
+float[200],float,Unknown,200
+float[20],float,Unknown,20
+float[21],float,Unknown,21
+float[21][2],float[2],Array,21
+float[22],float,Unknown,22
+float[23],float,Unknown,23
+float[24],float,Unknown,24
+float[2],float,Unknown,2
+float[2][10],float[10],Array,2
+float[2][15],float[15],Array,2
+float[2][21],float[21],Array,2
+float[2][6],float[6],Array,2
+float[30],float,Unknown,30
+float[3],float,Unknown,3
+float[3][4],float[4],Array,3
+float[40],float,Unknown,40
+float[46],float,Unknown,46
+float[4],float,Unknown,4
+float[4][4],float[4],Array,4
+float[4][6],float[6],Array,4
+float[4][8],float[8],Array,4
+float[50],float,Unknown,50
+float[5],float,Unknown,5
+float[60],float,Unknown,60
+float[65],float,Unknown,65
+float[6],float,Unknown,6
+float[70],float,Unknown,70
+float[7],float,Unknown,7
+float[80],float,Unknown,80
+float[81],float,Unknown,81
+float[8],float,Unknown,8
+float[9],float,Unknown,9
+fopAc_ac_c *[100],fopAc_ac_c *,Pointer,100
+fopAc_ac_c *[1],fopAc_ac_c *,Pointer,1
+fopAc_ac_c *[4],fopAc_ac_c *,Pointer,4
+fopAc_cullSizeBox[10],fopAc_cullSizeBox,Structure,10
+fopAc_cullSizeBox[14],fopAc_cullSizeBox,Structure,14
+fopAc_cullSizeBox[15],fopAc_cullSizeBox,Structure,15
+fopAc_cullSizeBox[2],fopAc_cullSizeBox,Structure,2
+fopAc_cullSizeBox[6],fopAc_cullSizeBox,Structure,6
+fopAc_cullSizeSphere[4],fopAc_cullSizeSphere,Structure,4
+fopAc_cullSizeSphere[7],fopAc_cullSizeSphere,Structure,7
+fopAc_cullSizeSphere[8],fopAc_cullSizeSphere,Structure,8
+fopMsgM_msgDataProc_c[1],fopMsgM_msgDataProc_c,Structure,1
+fopMsgM_msgDataProc_c[3],fopMsgM_msgDataProc_c,Structure,3
+fopMsgM_pane_class[10],fopMsgM_pane_class,Structure,10
+fopMsgM_pane_class[20],fopMsgM_pane_class,Structure,20
+fopMsgM_pane_class[21],fopMsgM_pane_class,Structure,21
+fopMsgM_pane_class[24],fopMsgM_pane_class,Structure,24
+fopMsgM_pane_class[3],fopMsgM_pane_class,Structure,3
+fopMsgM_pane_class[4],fopMsgM_pane_class,Structure,4
+fopMsgM_pane_class[6],fopMsgM_pane_class,Structure,6
+fopMsgM_pane_class[7],fopMsgM_pane_class,Structure,7
+fopMsgM_pane_class[8],fopMsgM_pane_class,Structure,8
+fopMsgM_pane_class[9],fopMsgM_pane_class,Structure,9
+int *[2],int *,Pointer,2
+int *[4],int *,Pointer,4
+int[100],int,Unknown,100
+int[10],int,Unknown,10
+int[120],int,Unknown,120
+int[125],int,Unknown,125
+int[12],int,Unknown,12
+int[13],int,Unknown,13
+int[15],int,Unknown,15
+int[16],int,Unknown,16
+int[18],int,Unknown,18
+int[19],int,Unknown,19
+int[1],int,Unknown,1
+int[200],int,Unknown,200
+int[20],int,Unknown,20
+int[20][6],int[6],Array,20
+int[21],int,Unknown,21
+int[24],int,Unknown,24
+int[256],int,Unknown,256
+int[25],int,Unknown,25
+int[28],int,Unknown,28
+int[2],int,Unknown,2
+int[30],int,Unknown,30
+int[31],int,Unknown,31
+int[320],int,Unknown,320
+int[32],int,Unknown,32
+int[3],int,Unknown,3
+int[3][2],int[2],Array,3
+int[4],int,Unknown,4
+int[5],int,Unknown,5
+int[60],int,Unknown,60
+int[64],int,Unknown,64
+int[6],int,Unknown,6
+int[6][20],int[20],Array,6
+int[70],int,Unknown,70
+int[7],int,Unknown,7
+int[80],int,Unknown,80
+int[8],int,Unknown,8
+int[90],int,Unknown,90
+int[9],int,Unknown,9
+int[9][2],int[2],Array,9
+int[9][3],int[3],Array,9
+int[9][9],int[9],Array,9
+interface_of_controller_pad[4],interface_of_controller_pad,Structure,4
+long[30],long,Unknown,30
+long[4],long,Unknown,4
+mDoExt_3DlineMatSortPacket[2],mDoExt_3DlineMatSortPacket,Structure,2
+mDoExt_AnmRatioPack[2],mDoExt_AnmRatioPack,Structure,2
+mDoExt_AnmRatioPack[3],mDoExt_AnmRatioPack,Structure,3
+mDoExt_McaMorf *[2],mDoExt_McaMorf *,Pointer,2
+mDoExt_MtxCalcAnmBlendTblOld *[2],mDoExt_MtxCalcAnmBlendTblOld *,Pointer,2
+mDoExt_bckAnm[50],mDoExt_bckAnm,Structure,50
+mDoExt_brkAnm *[2],mDoExt_brkAnm *,Pointer,2
+mDoExt_brkAnm[2],mDoExt_brkAnm,Structure,2
+mDoExt_brkAnm[50],mDoExt_brkAnm,Structure,50
+mDoExt_btkAnm[50],mDoExt_btkAnm,Structure,50
+mDoHIO_child_c[64],mDoHIO_child_c,Structure,64
+mesg_entry[1],mesg_entry,Structure,1
+mesg_entry[50],mesg_entry,Structure,50
+mo_ga_s[2],mo_ga_s,Structure,2
+node_list_class[10],node_list_class,Structure,10
+node_list_class[16],node_list_class,Structure,16
+part_s3[10],part_s3,Structure,10
+pointer[15],pointer,Pointer,15
+pointer[19],pointer,Pointer,19
+pointer[2],pointer,Pointer,2
+pointer[38],pointer,Pointer,38
+pointer[3],pointer,Pointer,3
+pointer[4],pointer,Pointer,4
+pointer[7],pointer,Pointer,7
+pointer[8],pointer,Pointer,8
+pointer[9],pointer,Pointer,9
+request_of_phase_process_class[10],request_of_phase_process_class,Structure,10
+roomRead_class__Room * *[64],roomRead_class__Room * *,Pointer,64
+roomRead_class__Room *[64],roomRead_class__Room *,Pointer,64
+roomRead_class__Room[64],roomRead_class__Room,Structure,64
+s16 *[4],s16 *,Pointer,4
+s16[10],s16,TypeDef,10
+s16[2],s16,TypeDef,2
+s16[3],s16,TypeDef,3
+s16[4],s16,TypeDef,4
+s16[5],s16,TypeDef,5
+s16[8],s16,TypeDef,8
+s32[7],s32,TypeDef,7
+s8[10],s8,TypeDef,10
+s8[8],s8,TypeDef,8
+sbyte[16],sbyte,Unknown,16
+sbyte[2][3],sbyte[3],Array,2
+sbyte[3],sbyte,Unknown,3
+sbyte[4],sbyte,Unknown,4
+short[0],short,Unknown,0
+short[10],short,Unknown,10
+short[128],short,Unknown,128
+short[12],short,Unknown,12
+short[14],short,Unknown,14
+short[15],short,Unknown,15
+short[16],short,Unknown,16
+short[1],short,Unknown,1
+short[21],short,Unknown,21
+short[21][6],short[6],Array,21
+short[21][7],short[7],Array,21
+short[256],short,Unknown,256
+short[260],short,Unknown,260
+short[2],short,Unknown,2
+short[2][3],short[3],Array,2
+short[2][5],short[5],Array,2
+short[32],short,Unknown,32
+short[36],short,Unknown,36
+short[3],short,Unknown,3
+short[3][2],short[2],Array,3
+short[4092],short,Unknown,4092
+short[40],short,Unknown,40
+short[4],short,Unknown,4
+short[50],short,Unknown,50
+short[5],short,Unknown,5
+short[5][2],short[2],Array,5
+short[60],short,Unknown,60
+short[64],short,Unknown,64
+short[6],short,Unknown,6
+short[7],short,Unknown,7
+short[8],short,Unknown,8
+st_ke_s[3],st_ke_s,Structure,3
+st_p[26],st_p,Structure,26
+stage_camera__entry[1],stage_camera__entry,Structure,1
+stage_envr_info_class[2],stage_envr_info_class,Structure,2
+stage_palet_info_class[10],stage_palet_info_class,Structure,10
+stage_palet_info_class[15],stage_palet_info_class,Structure,15
+stage_palet_info_class[16],stage_palet_info_class,Structure,16
+stage_palet_info_class[1],stage_palet_info_class,Structure,1
+stage_palet_info_class[8],stage_palet_info_class,Structure,8
+stage_pselect_info_class[2],stage_pselect_info_class,Structure,2
+stage_tresure_data_class[32],stage_tresure_data_class,Structure,32
+stage_vrbox_info_class[2],stage_vrbox_info_class,Structure,2
+stage_vrbox_info_class[5],stage_vrbox_info_class,Structure,5
+stage_vrbox_info_class[8],stage_vrbox_info_class,Structure,8
+tn_p[3],tn_p,Structure,3
+u16[10],u16,TypeDef,10
+u16[12],u16,TypeDef,12
+u16[3],u16,TypeDef,3
+u16[4],u16,TypeDef,4
+u16[8],u16,TypeDef,8
+u32[16],u32,TypeDef,16
+u32[2],u32,TypeDef,2
+u32[2][2],u32[2],Array,2
+u32[3],u32,TypeDef,3
+u32[4],u32,TypeDef,4
+u32[4][4],u32[4],Array,4
+u32[6],u32,TypeDef,6
+u32[8],u32,TypeDef,8
+u8[0],u8,TypeDef,0
+u8[112],u8,TypeDef,112
+u8[12],u8,TypeDef,12
+u8[13],u8,TypeDef,13
+u8[16],u8,TypeDef,16
+u8[2],u8,TypeDef,2
+u8[3],u8,TypeDef,3
+u8[49],u8,TypeDef,49
+u8[4],u8,TypeDef,4
+u8[4][112],u8[112],Array,4
+u8[5],u8,TypeDef,5
+u8[80],u8,TypeDef,80
+uchar[4],uchar,Unknown,4
+uint[10],uint,Unknown,10
+uint[16],uint,Unknown,16
+uint[3],uint,Unknown,3
+uint[4],uint,Unknown,4
+uint[5],uint,Unknown,5
+uint[8],uint,Unknown,8
+uint[9],uint,Unknown,9
+ulong[4],ulong,Unknown,4
+ulong[5],ulong,Unknown,5
+undefined *[4],undefined *,Pointer,4
+undefined *[5],undefined *,Pointer,5
+undefined1[12],undefined1,Unknown,12
+undefined1[14],undefined1,Unknown,14
+undefined1[16],undefined1,Unknown,16
+undefined1[248],undefined1,Unknown,248
+undefined1[24],undefined1,Unknown,24
+undefined1[28],undefined1,Unknown,28
+undefined1[32],undefined1,Unknown,32
+undefined1[40],undefined1,Unknown,40
+undefined1[48],undefined1,Unknown,48
+undefined1[64],undefined1,Unknown,64
+undefined1[68],undefined1,Unknown,68
+undefined1[6],undefined1,Unknown,6
+undefined4[4],undefined4,Unknown,4
+undefined4[6],undefined4,Unknown,6
+undefined[12],undefined,Unknown,12
+undefined[1448],undefined,Unknown,1448
+undefined[16],undefined,Unknown,16
+undefined[180],undefined,Unknown,180
+undefined[32],undefined,Unknown,32
+undefined[6],undefined,Unknown,6
+undefined[8],undefined,Unknown,8
+undefined[968],undefined,Unknown,968
+undefined[972],undefined,Unknown,972
+ushort[10],ushort,Unknown,10
+ushort[12],ushort,Unknown,12
+ushort[14],ushort,Unknown,14
+ushort[14][2],ushort[2],Array,14
+ushort[16],ushort,Unknown,16
+ushort[173][2],ushort[2],Array,173
+ushort[18],ushort,Unknown,18
+ushort[18][2],ushort[2],Array,18
+ushort[2],ushort,Unknown,2
+ushort[2][10],ushort[10],Array,2
+ushort[2][14],ushort[14],Array,2
+ushort[2][8],ushort[8],Array,2
+ushort[33],ushort,Unknown,33
+ushort[34],ushort,Unknown,34
+ushort[3],ushort,Unknown,3
+ushort[4],ushort,Unknown,4
+ushort[5],ushort,Unknown,5
+ushort[6],ushort,Unknown,6
+ushort[8],ushort,Unknown,8
+ushort[8][2],ushort[2],Array,8
+void *[10],void *,Pointer,10
+void *[12],void *,Pointer,12
+void *[13],void *,Pointer,13
+void *[2],void *,Pointer,2
+void *[3],void *,Pointer,3
+void *[4],void *,Pointer,4
+void *[50],void *,Pointer,50
+void *[5],void *,Pointer,5
+void *[6],void *,Pointer,6
+void *[8],void *,Pointer,8
+void *[9],void *,Pointer,9

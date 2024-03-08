@@ -1,0 +1,94 @@
+Function Name,Return Type,Parameter Types
+FuncDef500,void *,void *
+FuncDef501,void *,void *
+FuncDef550,void,"dBgW *, void *, cBgS_PolyInfo *, bool, cXyz *, csXyz *, csXyz *"
+FuncDef551,void,"fopAc_ac_c *, cXyz *, ulong"
+FuncDef552,int,"void *, void *, void *"
+FuncDef562,short *,long
+FuncDef563,short *,long
+FuncDef564,short *,long
+FuncDef565,short *,long
+FuncDef566,short *,long
+FuncDef567,long,void *
+FuncDef568,long,void *
+FuncDef569,void,ulong
+FuncDef570,long,void *
+FuncDef571,long,void *
+FuncDef572,long,void *
+FuncDef573,void,"ulong, ulong"
+FuncDef574,void,TPortArgs *
+FuncDef575,ushort,"TTrack *, ushort"
+FuncDef579,void,
+FuncDef580,void,
+FuncDef581,char *,TProcessor *
+FuncDef582,bool,TSequenceProcessor *
+FuncDef583,bool,"TSequenceProcessor *, ulong"
+FuncDef584,void,"void *, ulong, int"
+FuncDef585,void,ulong
+FuncDef586,void,ulong
+FuncDef587,void,ulong
+FuncDef588,void,ulong
+FuncDef589,void,ulong
+FuncDef590,void,"ushort, OSContext *, ulong, ulong"
+FuncDef591,void,"ushort, OSContext *, ulong, ulong"
+FuncDef592,void,"JUTGbaParam *, void *"
+FuncDef593,void,"JUTGbaParam *, void *"
+FuncDef594,void,"JUTGbaParam *, void *"
+FuncDef595,void,"JUTGbaParam *, void *"
+FuncDef596,void,"JUTGbaParam *, void *"
+FuncDef597,void,"JUTGbaParam *, void *"
+FuncDef598,void,"JUTGbaParam *, void *"
+FuncDef599,int,"void *, void *, void *"
+FuncDef600,int,"void *, void *, void *"
+FuncDef601,int,"void *, void *, void *"
+FuncDef602,int,"void *, void *, void *"
+FuncDef603,int,"void *, void *, void *"
+FuncDef604,int,"void *, void *, void *"
+FuncDef605,int,"void *, void *, void *"
+FuncDef606,int,"void *, void *, void *"
+FuncDef607,int,"void *, void *, void *"
+FuncDef608,int,"void *, void *, void *"
+FuncDef609,int,"void *, void *, void *"
+FuncDef610,void *,"void *, void *"
+FuncDef611,int,"void *, void *, void *"
+FuncDef612,void *,"void *, void *"
+FuncDef613,int,"void *, void *, void *"
+FuncDef614,void *,"void *, void *"
+FuncDef615,int,"void *, void *, void *"
+FuncDef616,int,"void *, void *, void *"
+FuncDef617,int,"void *, void *, void *"
+FuncDef618,int,"void *, void *, void *"
+FuncDef619,void *,"void *, void *"
+FuncDef620,int,"void *, void *, void *"
+FuncDef621,int,"void *, void *, void *"
+FuncDef622,int,"void *, void *, void *"
+FuncDef623,int,"void *, void *, void *"
+FuncDef624,int,"void *, void *, void *"
+FuncDef625,int,"void *, void *, void *"
+FuncDef626,int,"void *, void *, void *"
+FuncDef627,int,"void *, void *, void *"
+FuncDef628,void *,"void *, void *"
+FuncDef629,int,"void *, void *, void *"
+FuncDef630,int,"void *, void *, void *"
+FuncDef631,void *,"void *, void *"
+FuncDef632,int,"void *, void *, void *"
+FuncDef633,int,"void *, void *, void *"
+FuncDef634,void *,"void *, void *"
+FuncDef635,int,"void *, void *, void *"
+FuncDef636,int,"void *, void *, void *"
+FuncDef637,int,"void *, void *, void *"
+FuncDef638,int,"void *, void *, void *"
+FuncDef639,int,"void *, void *, void *"
+FuncDef640,int,"void *, void *, void *"
+FuncDef641,int,"void *, void *, void *"
+FuncDef642,int,"void *, void *, void *"
+FuncDef643,int,"void *, void *, void *"
+FuncDef644,void *,"void *, void *"
+FuncDef645,int,"void *, void *, void *"
+FuncDef646,int,"void *, void *, void *"
+FuncDef647,void *,"void *, void *"
+FuncDef648,int,"void *, void *, void *"
+FuncDef649,int,"void *, void *, void *"
+FuncDef650,int,"void *, void *, void *"
+cPhs__Handler,int,void *
+fpcMtd__Method,int,void *

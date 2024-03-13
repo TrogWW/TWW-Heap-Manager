@@ -4,7 +4,7 @@ A tool for viewing Zelda Heap memory and viewing/editing actor instance data in 
 ### View the Free/Used memory of Zelda Heap
 ![App GIF](Docs/heap_viewer.gif)
 
-### Real time editing of actor data
+### Real time editing of actor data (Click the Green Arrow in Heap View)
 ![App GIF](Docs/struct_viewer.gif)
 
 ## Table of Contents

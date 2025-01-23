@@ -204,13 +204,17 @@ namespace TWWHeapVisualizer
                 case "NTSC-U":
                     ActorData.fopActQueueHead = 0x80372028;
                     ActorData.zeldaHeapPtr = 0x803F6928;
-                    ActorData.objectNameTableAddress = 0x80372818;
+                    ActorData.objectNameTableAddress = 0x80372818; //803398D8
+                    DynamicModuleControl.StartAddress = 0x803B9218;
+                    DynamicNameTable.StartAddress = 0x803398D8;
                     ActorData.Instance.InitializeData();
                     break;
                 case "JP":
                     ActorData.fopActQueueHead = 0x803654CC;
                     ActorData.zeldaHeapPtr = 0x803E9E00;
-                    ActorData.objectNameTableAddress = 0x80365CB8;
+                    ActorData.objectNameTableAddress = 0x80365CB8; 
+                    DynamicModuleControl.StartAddress = 0;
+                    DynamicNameTable.StartAddress = 0;
                     ActorData.Instance.InitializeData();
                     break;
                 default:

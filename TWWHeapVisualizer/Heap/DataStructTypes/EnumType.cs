@@ -53,7 +53,7 @@ public class EnumType : IMemoryAccessor
                 value = Memory.ReadMemory<byte>(address);
                 break;
             case 2:
-                value = Memory.ReadMemory<short>(address);
+                value = Memory.ReadMemory<ushort>(address);
                 break;
             case 4:
                 value = Memory.ReadMemory<int>(address);

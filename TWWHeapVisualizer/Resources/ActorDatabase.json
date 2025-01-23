@@ -6323,7 +6323,7 @@
     "ActorClassType": "npc_os",
     "Wait Animations": null,
     "Actor Name": "Os2",
-    "English Name": "npc_os",
+    "English Name": "TotG Command Statue",
     "Tags": null,
     "Explanation": null,
     "Locations": [
@@ -12092,7 +12092,7 @@
     "ActorClassType": "salvage",
     "Wait Animations": null,
     "Actor Name": "SalvFM",
-    "English Name": "Full Moon Salvage Point",
+    "English Name": "Salvage Point",
     "Tags": null,
     "Explanation": null,
     "Locations": [

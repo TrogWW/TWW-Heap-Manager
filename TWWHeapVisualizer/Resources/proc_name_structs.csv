@@ -61,9 +61,10 @@ PROC_WARPFLOWER,106,fopAc_ac_c,unmapped.cpp,True
 PROC_WARPFOUT,107,daWarpfout_c,d_a_warpfout.cpp,False
 PROC_WARPLIGHT,108,fopAc_ac_c,unmapped.cpp,True
 PROC_WARPHYRULE,109,fopAc_ac_c,unmapped.cpp,True
-PROC_WARPDEMO20,110,fopAc_ac_c,unmapped.cpp,True
+PROC_WARPDEMO20,110,daWarpdm20_c,unmapped.cpp,True
 PROC_WARPGANON,111,fopAc_ac_c,unmapped.cpp,True
 PROC_WARPMAJYUU,112,fopAc_ac_c,unmapped.cpp,True
+PROC_BALANCELIFT,113,daBalancelift_c,unmapped.cpp,True
 PROC_SHUTTER,114,daShutter_c,d_a_shutter.cpp,True
 PROC_SHUTTER2,115,daShutter2_c,d_a_shutter2.cpp,True
 PROC_WINDMILL,116,daWindMill_c,d_a_windmill.cpp,True
@@ -166,7 +167,8 @@ PROC_SPC_ITEM01,263,daSpcItem01_c,d_a_spc_item01.cpp,False
 PROC_TBOX,294,daTbox_c,d_a_tbox.cpp,False
 PROC_SBOX,295,daSbox_c,d_a_sbox.cpp,True
 PROC_BOMB,296,daBomb_c,d_a_bomb.cpp,True
-PROC_BOMB_FLOWER,298,fopAc_ac_c,unmapped.cpp,True
+PROC_Bomb2,297,daBomb_c,unmapped.cpp,True
+PROC_BOMB_FLOWER,298,daBomb_c,unmapped.cpp,True
 PROC_ACORN_LEAF,299,daAleaf_c,d_a_acorn_leaf.cpp,True
 PROC_SWC00,300,swc00_class,d_a_swc00.cpp,False
 PROC_FAN,301,daFan_c,d_a_fan.cpp,False
@@ -264,6 +266,7 @@ PROC_KYTAG07,392,kytag07_class,d_a_kytag07.cpp,True
 PROC_YOUGAN,394,daYougan_c,d_a_yougan.cpp,True
 PROC_SAKU,401,daSaku_c,d_a_saku.cpp,True
 PROC_DISAPPEAR,403,disappear_class,d_a_disappear.cpp,False
+PROC_SALVAGE,404,daSalvage_c,d_a_salvage.cpp,False
 PROC_SALVAGE_TBOX,405,daSTBox_c,d_a_salvage_tbox.cpp,True
 PROC_OBJ_FIGURE,407,daObjFigure_c,d_a_obj_figure.cpp,True
 PROC_OBJ_HAT,408,daObjHat_c,d_a_obj_hat.cpp,True
@@ -308,8 +311,9 @@ PROC_ATT,454,att_class,d_a_att.cpp,True
 PROC_WPILLAR,455,fopAc_ac_c,unmapped.cpp,True
 PROC_SWHIT0,457,daSwhit0_c,d_a_swhit0.cpp,False
 PROC_TAG_GSHIP,458,daTag_Gship_c,d_a_tag_ghostship.cpp,False
-PROC_TSUBO,459,Act_c,d_a_tsubo.cpp,True
+PROC_TSUBO,459,fopAc_ac_c,d_a_tsubo.cpp,True
 PROC_STONE,460,Act_c,d_a_stone.cpp,True
+PROC_BARREL_2,463,daObjBarrel2,d_a_barrel2.cpp,False
 PROC_STANDITEM,468,fopAc_ac_c,unmapped.cpp,True
 PROC_BOKO,469,daBoko_c,d_a_boko.cpp,True
 PROC_TAMA,470,daTama_c,d_a_tama.cpp,False
@@ -322,7 +326,7 @@ PROC_CAMERA2,483,fopAc_ac_c,unmapped.cpp,True
 PROC_KYEFF,484,fopAc_ac_c,unmapped.cpp,True
 PROC_KYEFF2,485,fopAc_ac_c,unmapped.cpp,True
 PROC_MESG,486,fopAc_ac_c,unmapped.cpp,True
-PROC_MSG,487,daTag_Msg_c,d_a_msw.cpp,True
+PROC_MSG,487,sub_msg_class,d_a_msw.cpp,True
 PROC_MSG2,488,daTag_Msg_c,unmapped.cpp,True
 PROC_MSG3,489,daTag_Msg_c,unmapped.cpp,True
 PROC_MENUWINDOW,490,fopAc_ac_c,unmapped.cpp,True
@@ -335,4 +339,6 @@ PROC_METER,497,fopAc_ac_c,unmapped.cpp,True
 PROC_OPERATE_WIND,498,fopAc_ac_c,unmapped.cpp,True
 PROC_SCP,499,fopAc_ac_c,unmapped.cpp,True
 PROC_PB,500,bb_class,d_a_bb.cpp,True
-PROC_GAMEOVER,501,fopAc_ac_c,unmapped.cpp,True
+PROC_GAMEOVER,501,dGameover_c,unmapped.cpp,True
+PROC_FallRock,425,daFallRock_c,unmapped.cpp,True
+PROC_TagRock,424,daFallRockTag_c,unmapped.cpp,True

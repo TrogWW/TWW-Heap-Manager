@@ -117,7 +117,6 @@ public class DataTypeResolver
         {
             throw new Exception("Unable to locate component type in resolved types.");
         }
-
         var arrayType = new ArrayType
         {
             ComponentDataType = componentType,

@@ -30,6 +30,8 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public ushort itemID { get; set; }
         public fopAc_ac_c actor { get; set; }
         public ObjectName data { get; set; }
+        public string relFileName { get; set; }
+        public uint relPointer { get; set; }
         public uint gamePtr { get; set; }
         public UsedMemoryBlock(uint startAddress, int index)
         {
@@ -68,7 +70,12 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
 
             //lvi.BackColor = color;
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, "Used"));
-
+            //string relPointerStr = "";
+            //if(relPointer != 0)
+            //{
+            //    relPointerStr = this.relPointer.ToString("X") + " " + $"({this.relFileName})";
+            //}
+            //lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, relPointerStr));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.data?.ToString() ?? ""));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));
             return lvi;

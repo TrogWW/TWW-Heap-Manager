@@ -10,7 +10,7 @@ namespace TWWHeapVisualizer.DataStructTypes
     public class TypeDefType : IMemoryAccessor
     {
         public string DataStructType { get; set; }
-        public IDataType BaseDataType { get; set; }
+        public IMemoryAccessor BaseDataType { get; set; }
         public string DataTypeName { get; set; }
 
         public int Size => BaseDataType.Size;
@@ -27,13 +27,15 @@ namespace TWWHeapVisualizer.DataStructTypes
 
         public string Read(ulong address, int length)
         {
-            return "";
+            
+            return BaseDataType.Read(address, length);
             //throw new NotImplementedException();
         }
 
         public void Write(ulong address, string value, int length)
         {
-            return;
+            BaseDataType.Write(address, value, length);
+            //return;
         }
     }
 }

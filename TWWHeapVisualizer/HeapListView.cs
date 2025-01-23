@@ -33,7 +33,6 @@ namespace TWWHeapVisualizer
             // Get the text values for comparison based on the column to sort
             string textX = GetTextValue(x);
             string textY = GetTextValue(y);
-
             // Parse numeric values for specific columns
             if (columnToSort == 0 || columnToSort == 3) // Assuming column 0 and 3 should be sorted numerically
             {
@@ -61,7 +60,7 @@ namespace TWWHeapVisualizer
             else
             {
                 // Perform string comparison for other columns
-                int result = String.Compare(textX, textY);
+                int result = String.Compare(textX.ToLower(), textY.ToLower());
 
                 // If the primary comparison is a tie, compare by startAddress
                 if (result == 0 && columnToSort != 1 && columnToSort != 2) // Assuming 1 and 2 are startAddress and endAddress columns
@@ -215,6 +214,7 @@ namespace TWWHeapVisualizer
             this.Columns.Add("End Address", 100, HorizontalAlignment.Left);
             this.Columns.Add("Size", 80, HorizontalAlignment.Left);
             this.Columns.Add("Status", 80, HorizontalAlignment.Left);
+            //this.Columns.Add("Rel Pointer", 150, HorizontalAlignment.Left);
             this.Columns.Add("Data", 150, HorizontalAlignment.Left);
             this.Columns.Add("", 100, HorizontalAlignment.Left);
         }
@@ -561,6 +561,7 @@ namespace TWWHeapVisualizer
 
         public void UpdateList(object sender, EventArgs e)
         {
+            //DynamicModuleControl dmc  = new DynamicModuleControl();
             memoryBlocks = new List<IMemoryBlock>();
 
             uint fopActQueueAddress = Memory.ReadMemory<uint>((ulong)ActorData.fopActQueueHead);
@@ -580,6 +581,12 @@ namespace TWWHeapVisualizer
                     usedBlock.actor = this.actors[usedBlock.gamePtr];
 
                 }
+                //if(usedBlock.itemID != 0 && dmc.Entries.ContainsKey((ushort)usedBlock.itemID))
+                //{
+                //    var entry = dmc.Entries[(ushort)usedBlock.itemID];
+                //    usedBlock.relFileName = entry.relFileName;
+                //    usedBlock.relPointer = entry.relPointer;
+                //}
             }
             memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
             // Check if the item being retrieved is a column header
@@ -632,7 +639,7 @@ namespace TWWHeapVisualizer
             UsedMemoryBlock usedMemoryBlock = (UsedMemoryBlock)memoryBlock;
             MemoryDataForm memoryDataGridViewForm = new MemoryDataForm(_timer, usedMemoryBlock);
             // Show the form as a dialog
-            memoryDataGridViewForm.ShowDialog();
+            memoryDataGridViewForm.Show();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace TWWHeapVisualizer.DataStructTypes
     public class StructureType : IMemoryAccessor
     {
         public string DataTypeName { get; set; }
-        public int Size => Properties.Sum(p => p.DataType.Size);
+        //public int Size => Properties.Sum(p => p.DataType.Size);
+        public int Size => Properties.Sum(p => p.Length);
         //public int Offset { get; set; }
         //public int Length { get; set; }
         public List<Property> Properties { get; set; } // Store resolved properties

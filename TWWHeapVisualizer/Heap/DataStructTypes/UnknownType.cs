@@ -126,7 +126,7 @@ public class UnknownType : IMemoryAccessor
             case "char":
                 return Memory.ReadMemory<char>(address).ToString();
             case "short":
-                return Memory.ReadMemory<short>(address).ToString();
+                return Memory.ReadMemory<ushort>(address).ToString();
             case "sbyte":
                 return Memory.ReadMemory<sbyte>(address).ToString();
             default:
@@ -237,9 +237,9 @@ public class UnknownType : IMemoryAccessor
                 }
                 break;
             case "short":
-                if (short.TryParse(value, out short shortValue))
+                if (ushort.TryParse(value, out ushort shortValue))
                 {
-                    Memory.WriteMemory<short>(address, shortValue);
+                    Memory.WriteMemory<ushort>(address, shortValue);
                 }
                 break;
             case "sbyte":

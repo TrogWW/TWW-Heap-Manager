@@ -28,6 +28,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.size.ToString()));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, "Free"));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));
+            //lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));
             //lvi.BackColor = Color.Green;
             //lvi.BackColor = color;

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Text;
 using TWWHeapVisualizer.Dolphin;
 using TWWHeapVisualizer.Heap.DataStructTypes.GhidraParsing;
+using TWWHeapVisualizer.Helpers;
 
 namespace TWWHeapVisualizer.Heap
 {
@@ -61,6 +62,7 @@ namespace TWWHeapVisualizer.Heap
         public static UInt64 fopActQueueHead = 0x803654CC;  //can be overwritten in version selection menu     
         public static UInt64 zeldaHeapPtr = 0x803E9E00; //can be overwritten in version selection menu
         public static UInt64 objectNameTableAddress = 0x80365CB8; //can be overwritten in version selection menu
+        
         public static UInt64 fpcCttg_Queue = 0x80365b30; //actors to create queue...TODO
         private static readonly Lazy<ActorData> lazy =
             new Lazy<ActorData>(() => new ActorData());
@@ -69,6 +71,7 @@ namespace TWWHeapVisualizer.Heap
         public Dictionary<ushort, ProcNameEntry> ProcStructNames { get; set; }
         public Dictionary<string, int> Sizes;
         public Dictionary<string, IMemoryAccessor> DataTypes;
+        public DynamicNameTable DynamicNameTable { get; set; }
         //public List<ObjectName> ObjectNameTable;
         public Dictionary<ushort,ObjectName> ObjectNameTable;
         private string _binDirectoryPath;
@@ -168,6 +171,7 @@ namespace TWWHeapVisualizer.Heap
                 }
             }
             DataTypes = GhidraStructParser.LoadDataStructs();
+            //DynamicNameTable = new DynamicNameTable();
         }
 
         public Dictionary<ushort, ProcNameEntry> ParseProcNamesCsv()

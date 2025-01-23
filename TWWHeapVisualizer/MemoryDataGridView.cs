@@ -593,7 +593,7 @@ namespace TWWHeapVisualizer
                     }
                     else if(columnName == "Locked")
                     {
-                        if(item.memoryAccessor is EnumType || item.memoryAccessor is UnknownType)
+                        if(item.memoryAccessor is EnumType || item.memoryAccessor is UnknownType || item.memoryAccessor is TypeDefType)
                         {
                             e.PaintContent(e.CellBounds);
                         }
@@ -689,7 +689,7 @@ namespace TWWHeapVisualizer
                         comboBoxCell.Items.Add("");
                         foreach(string key in enumItem.EnumValues.Keys)
                         {
-                            comboBoxCell.Items.Add(key);
+                            comboBoxCell.Items.Add($"{key} - {enumItem.EnumValues[key]}");
                         }
                         comboBoxCell.Value = item.Value;
                         dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex] = comboBoxCell;

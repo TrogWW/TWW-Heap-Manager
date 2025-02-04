@@ -4,7 +4,7 @@ A tool for viewing Zelda Heap memory and viewing/editing actor instance data in 
 ### View the Free/Used memory of Zelda Heap
 ![App GIF](Docs/heap_viewer.gif)
 
-### Real time editing data of actor data
+### Real time editing of actor data (Click the Green Arrow in Heap View)
 ![App GIF](Docs/struct_viewer.gif)
 
 ## Table of Contents
@@ -25,7 +25,7 @@ A tool for viewing Zelda Heap memory and viewing/editing actor instance data in 
 
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/TrogWW/TWW-Heap-Manager.git
 ```
 2. **Open Solution in Visual Studio:**
    - Launch Visual Studio IDE.

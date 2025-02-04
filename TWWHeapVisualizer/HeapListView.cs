@@ -145,7 +145,7 @@ namespace TWWHeapVisualizer
 
         public List<IMemoryBlock> memoryBlocks;
         public List<IMemoryBlock> filteredMemoryBlocks;
-
+        public List<uint> filledMemoryBlocks; // list of start addresses to mark used blocks as filled (or corrupted)
         public List<FreeMemoryBlock> freeBlocks
         {
             get
@@ -188,7 +188,7 @@ namespace TWWHeapVisualizer
             InitializeListView();
             this._timer = timer;
             this.memoryBlocks = new List<IMemoryBlock>();
-
+            this.filledMemoryBlocks = new List<uint>();
             //this.ListViewItemSorter = new HeapListViewSorter(0, SortOrder.Ascending); // Default sorting by the first column in ascending order
             
 
@@ -229,6 +229,7 @@ namespace TWWHeapVisualizer
                // string tag = e.Item.Tag.ToString();
                 if (block is UsedMemoryBlock)
                 {
+                    bool isFilled = filledMemoryBlocks.Contains(block.startAddress);
                     IMemoryBlock hoveredBlock = null;
                     Point localMousePosition = this.PointToClient(ZeldaHeapViewer.MousePosition);
                     var hit = this.HitTest(localMousePosition);
@@ -251,7 +252,14 @@ namespace TWWHeapVisualizer
                     }
                     else
                     {
-                        backColor = Color.FromArgb(255, 125, 98);
+                        if (isFilled)
+                        {
+                            backColor = Color.FromArgb(255, 153, 0); // Define the background color for the button
+                        }
+                        else
+                        {
+                            backColor = Color.FromArgb(255, 125, 98); // Define the background color for the button
+                        }
                     }
                         // Red background for "Used" items
                     using (SolidBrush brush = new SolidBrush(backColor)) // Adjust RGB values as needed
@@ -285,7 +293,7 @@ namespace TWWHeapVisualizer
             IMemoryBlock block = e.Item.Tag as IMemoryBlock;
             if (block is UsedMemoryBlock)
             {
-
+                bool isFilled = filledMemoryBlocks.Contains(block.startAddress);
                 int buttonPadding = 0;
                 Rectangle buttonBounds = new Rectangle(e.Bounds.Left + buttonPadding, e.Bounds.Top + buttonPadding,
                                                         e.Bounds.Width - 2 * buttonPadding, e.Bounds.Height - 2 * buttonPadding);
@@ -321,7 +329,15 @@ namespace TWWHeapVisualizer
                 }
                 else
                 {
-                    buttonBackColor = Color.FromArgb(255, 125, 98); // Define the background color for the button
+                    if (isFilled)
+                    {
+                        buttonBackColor = Color.FromArgb(255, 153, 0); // Define the background color for the button
+                    }
+                    else
+                    {
+                        buttonBackColor = Color.FromArgb(255, 125, 98); // Define the background color for the button
+                    }
+                    
                 }
                 // Draw the button
                 ButtonRenderer.DrawButton(e.Graphics, buttonBounds, e.Item.Selected ? PushButtonState.Pressed : PushButtonState.Normal);
@@ -479,6 +495,21 @@ namespace TWWHeapVisualizer
                 throw;
             }
 
+        }
+        public void ApplyFilledMemory()
+        {
+            filledMemoryBlocks.Clear();
+            foreach (var block in memoryBlocks)
+            {
+                if (block is UsedMemoryBlock uBlock)
+                {
+                    filledMemoryBlocks.Add(block.startAddress);
+                }
+            }
+        }
+        public void ClearFilledMemory()
+        {
+            filledMemoryBlocks.Clear();
         }
         public void ApplyDataFilter()
         {

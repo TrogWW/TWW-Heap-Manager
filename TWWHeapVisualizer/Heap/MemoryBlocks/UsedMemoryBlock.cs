@@ -18,7 +18,6 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public const UInt64 itemID_Offset = 0x1E;
         public const UInt64 gamePtrOffset = 0x100;
         public const UInt64 actorDataOffset = 0x10;
-
         public byte unknownValue { get; set; }
         public byte usedOrFree { get; set; }
         public uint startAddress { get; set; }

@@ -71,6 +71,7 @@ namespace TWWHeapVisualizer
             this.menuStrip = new MenuStrip();
 
             ToolStripMenuItem fileMenu = new ToolStripMenuItem("File");
+            ToolStripMenuItem editMenu = new ToolStripMenuItem("Edit");
             ToolStripMenuItem helpMenu = new ToolStripMenuItem("Help");
 
             // File menu items
@@ -79,6 +80,9 @@ namespace TWWHeapVisualizer
             ToolStripMenuItem twwVersionItem = new ToolStripMenuItem("TWW Version");
             ToolStripMenuItem exitMenuItem = new ToolStripMenuItem("Exit");
 
+            // Edit menu items
+            ToolStripMenuItem markUsedAsFilled = new ToolStripMenuItem("Mark Used Blocks as Filled");
+            ToolStripMenuItem markUsedAsCleared = new ToolStripMenuItem("Mark Used Blocks as Cleared");
             // Help menu items
             ToolStripMenuItem aboutMenuItem = new ToolStripMenuItem("Github");
 
@@ -87,6 +91,10 @@ namespace TWWHeapVisualizer
             fileMenu.DropDownItems.Add(importGhidraCsvsItem);
             fileMenu.DropDownItems.Add(twwVersionItem);
             fileMenu.DropDownItems.Add(exitMenuItem);
+
+            // Add edit menu items
+            editMenu.DropDownItems.Add(markUsedAsFilled);
+            editMenu.DropDownItems.Add(markUsedAsCleared);
 
             // Add help menu items
             helpMenu.DropDownItems.Add(aboutMenuItem);
@@ -97,6 +105,8 @@ namespace TWWHeapVisualizer
             exitMenuItem.Click += ExitMenuItem_Click;
             aboutMenuItem.Click += AboutMenuItem_Click;
 
+            markUsedAsFilled.Click += MarkUsedAsFilled_Click;
+            markUsedAsCleared.Click += MarkUsedAsCleared_Click;
             // Create a secondary menu with NTSC-U and JP options
             ContextMenuStrip secondaryMenu = new ContextMenuStrip();
 
@@ -115,6 +125,7 @@ namespace TWWHeapVisualizer
 
             // Add menus to MenuStrip
             menuStrip.Items.Add(fileMenu);
+            menuStrip.Items.Add(editMenu);
             menuStrip.Items.Add(helpMenu);
 
             // Set MenuStrip as the menu of the form
@@ -123,6 +134,9 @@ namespace TWWHeapVisualizer
             // Add MenuStrip to the form's controls
             this.Controls.Add(menuStrip);
         }
+
+
+
 
         // Method to initialize the ComboBox for memory block type selection
         private void InitializeComboBoxMemoryBlockType()
@@ -144,10 +158,12 @@ namespace TWWHeapVisualizer
             checkBoxFilter.Text = "Hide Empty Name Data";
             checkBoxFilter.CheckedChanged += CheckBoxFilter_CheckedChanged; // Handle checkbox change event
 
+
             // Create ToolStripControlHost to host the CheckBox
             ToolStripControlHost hostCheckBox = new ToolStripControlHost(checkBoxFilter);
             hostCheckBox.AutoSize = false; // Set AutoSize to false to allow manual sizing
             hostCheckBox.Size = new Size(200, menuStrip.Height); // Set the size of the host
+
 
             // Add padding to the hosts
             hostComboBox.Padding = new Padding(30, 0, 0, 0); // Left padding for ComboBox
@@ -161,6 +177,9 @@ namespace TWWHeapVisualizer
             // Add the CheckBox host to the MenuStrip
             menuStrip.Items.Add(hostCheckBox); // Add CheckBox to the menu strip
         }
+
+
+
         // Event handler for ComboBox memory block type selection change
         private void ComboBoxMemoryBlockType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -220,6 +239,14 @@ namespace TWWHeapVisualizer
                 default:
                     break;
             }
+        }
+        private void MarkUsedAsFilled_Click(object? sender, EventArgs e)
+        {
+            heapListView.ApplyFilledMemory();
+        }
+        private void MarkUsedAsCleared_Click(object? sender, EventArgs e)
+        {
+            heapListView.ClearFilledMemory();
         }
 
         // Event handler for CheckBox filter change

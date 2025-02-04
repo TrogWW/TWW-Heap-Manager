@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TWWHeapVisualizer.DataStructTypes;
 using TWWHeapVisualizer.Extensions;
 using TWWHeapVisualizer.Heap;
@@ -721,7 +718,7 @@ namespace TWWHeapVisualizer
             {
                 // Get the corresponding data item
                 MyDataItem item = (MyDataItem)row.DataBoundItem;
-
+  
                 try
                 {
                     ulong address = item.BaseAddress + (ulong)item.Offset;

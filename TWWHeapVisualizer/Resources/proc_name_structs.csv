@@ -335,7 +335,7 @@ PROC_AUCTION_SCREEN,493,fopAc_ac_c,unmapped.cpp,True
 PROC_PLACE_NAME,494,fopAc_ac_c,unmapped.cpp,True
 PROC_MINIGAME_STARTER,495,fopAc_ac_c,unmapped.cpp,True
 PROC_MINIGAME_TERMINATER,496,fopAc_ac_c,unmapped.cpp,True
-PROC_METER,497,fopAc_ac_c,unmapped.cpp,True
+PROC_METER,497,sub_meter_class,unmapped.cpp,True
 PROC_OPERATE_WIND,498,fopAc_ac_c,unmapped.cpp,True
 PROC_SCP,499,fopAc_ac_c,unmapped.cpp,True
 PROC_PB,500,bb_class,d_a_bb.cpp,True

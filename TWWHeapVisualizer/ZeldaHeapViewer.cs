@@ -9,6 +9,7 @@ using TWWHeapVisualizer.Extensions;
 using TWWHeapVisualizer.FormElements;
 using TWWHeapVisualizer.Heap;
 using TWWHeapVisualizer.Heap.DataStructTypes.GhidraParsing;
+using TWWHeapVisualizer.Heap.MemoryBlocks;
 using Timer = System.Windows.Forms.Timer;
 
 namespace TWWHeapVisualizer
@@ -17,6 +18,7 @@ namespace TWWHeapVisualizer
     {
         // Declare form controls and variables
         private HeapListView heapListView;
+        private HeapBarForm heapVisualizerForm;
         private MenuStrip menuStrip;
         private Panel mainPanel;
         private LoadingForm loadingForm;
@@ -138,44 +140,66 @@ namespace TWWHeapVisualizer
 
 
 
-        // Method to initialize the ComboBox for memory block type selection
         private void InitializeComboBoxMemoryBlockType()
         {
             // Create ComboBox for memory block type selection
             comboBoxMemoryBlockType = new ComboBox();
             comboBoxMemoryBlockType.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxMemoryBlockType.Items.AddRange(new string[] { "Free", "Used", "All" }); // Add memory block type options
-            comboBoxMemoryBlockType.SelectedIndex = 2; // Set default selection to "All"
-            comboBoxMemoryBlockType.SelectedIndexChanged += ComboBoxMemoryBlockType_SelectedIndexChanged; // Handle selection change event
+            comboBoxMemoryBlockType.Items.AddRange(new string[] { "Free", "Used", "All" });
+            comboBoxMemoryBlockType.SelectedIndex = 2;
+            comboBoxMemoryBlockType.SelectedIndexChanged += ComboBoxMemoryBlockType_SelectedIndexChanged;
 
-            // Create ToolStripControlHost to host the ComboBox
             ToolStripControlHost hostComboBox = new ToolStripControlHost(comboBoxMemoryBlockType);
-            hostComboBox.AutoSize = false; // Set AutoSize to false to allow manual sizing
-            hostComboBox.Size = new Size(250, menuStrip.Height); // Set the size of the host
+            hostComboBox.AutoSize = false;
+            hostComboBox.Size = new Size(250, menuStrip.Height);
+            hostComboBox.Padding = new Padding(30, 0, 0, 0);
+            hostComboBox.Alignment = ToolStripItemAlignment.Right;
 
-            // Create CheckBox for filtering
+            // New checkbox for enabling bar view
+            CheckBox checkBoxBarView = new CheckBox();
+            checkBoxBarView.Text = "Enable Bar View";
+            checkBoxBarView.CheckedChanged += CheckBoxBarView_CheckedChanged;
+
+            ToolStripControlHost hostCheckBoxBarView = new ToolStripControlHost(checkBoxBarView);
+            hostCheckBoxBarView.AutoSize = false;
+            hostCheckBoxBarView.Size = new Size(150, menuStrip.Height);
+            hostCheckBoxBarView.Alignment = ToolStripItemAlignment.Right;
+
+            // Existing checkbox for hiding empty name data
             CheckBox checkBoxFilter = new CheckBox();
             checkBoxFilter.Text = "Hide Empty Name Data";
-            checkBoxFilter.CheckedChanged += CheckBoxFilter_CheckedChanged; // Handle checkbox change event
+            checkBoxFilter.CheckedChanged += CheckBoxFilter_CheckedChanged;
+
+            ToolStripControlHost hostCheckBoxFilter = new ToolStripControlHost(checkBoxFilter);
+            hostCheckBoxFilter.AutoSize = false;
+            hostCheckBoxFilter.Size = new Size(200, menuStrip.Height);
+            hostCheckBoxFilter.Padding = new Padding(0, 0, 30, 0);
+            hostCheckBoxFilter.Alignment = ToolStripItemAlignment.Right;
+
+            // Add items to menu strip in reverse visual order (right to left)
+            menuStrip.Items.Add(hostComboBox);
+            menuStrip.Items.Add(hostCheckBoxFilter);
+            menuStrip.Items.Add(hostCheckBoxBarView); // Inserted to the left of the previous one
+        }
 
 
-            // Create ToolStripControlHost to host the CheckBox
-            ToolStripControlHost hostCheckBox = new ToolStripControlHost(checkBoxFilter);
-            hostCheckBox.AutoSize = false; // Set AutoSize to false to allow manual sizing
-            hostCheckBox.Size = new Size(200, menuStrip.Height); // Set the size of the host
 
+        private void CheckBoxBarView_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            if (checkBox.Checked)
+            {
+                // Replace with your actual memory block list source
+                List<IMemoryBlock> currentHeapBlocks = heapListView.memoryBlocks;
 
-            // Add padding to the hosts
-            hostComboBox.Padding = new Padding(30, 0, 0, 0); // Left padding for ComboBox
-            hostCheckBox.Padding = new Padding(0, 0, 30, 0); // Right padding for CheckBox
-            hostComboBox.Alignment = ToolStripItemAlignment.Right;
-            hostCheckBox.Alignment = ToolStripItemAlignment.Right;
-
-            // Add the ComboBox host to the MenuStrip
-            menuStrip.Items.Add(hostComboBox); // Add ComboBox to the menu strip
-
-            // Add the CheckBox host to the MenuStrip
-            menuStrip.Items.Add(hostCheckBox); // Add CheckBox to the menu strip
+                heapVisualizerForm = new HeapBarForm(heapListView);
+                heapVisualizerForm.Show();
+            }
+            else
+            {
+                heapVisualizerForm?.Close();
+                heapVisualizerForm = null;
+            }
         }
 
 

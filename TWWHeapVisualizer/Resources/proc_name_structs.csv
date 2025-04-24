@@ -20,7 +20,7 @@ PROC_OVERLAP3,17,fopAc_ac_c,unmapped.cpp,True
 PROC_OVERLAP4,18,fopAc_ac_c,unmapped.cpp,True
 PROC_OVERLAP5,19,fopAc_ac_c,unmapped.cpp,True
 PROC_ROOM_SCENE,20,fopAc_ac_c,unmapped.cpp,True
-PROC_KANKYO,21,fopAc_ac_c,unmapped.cpp,True
+PROC_KANKYO,21,dScnKy_env_light_c,unmapped.cpp,True
 PROC_ALLDIE,22,daAlldie_c,d_a_alldie.cpp,False
 PROC_ENVSE,23,fopAc_ac_c,unmapped.cpp,True
 PROC_WIND_ARROW,24,fopAc_ac_c,unmapped.cpp,True
@@ -329,7 +329,7 @@ PROC_MESG,486,fopAc_ac_c,unmapped.cpp,True
 PROC_MSG,487,sub_msg_class,d_a_msw.cpp,True
 PROC_MSG2,488,daTag_Msg_c,unmapped.cpp,True
 PROC_MSG3,489,daTag_Msg_c,unmapped.cpp,True
-PROC_MENUWINDOW,490,fopAc_ac_c,unmapped.cpp,True
+PROC_MENUWINDOW,490,sub_ms_screen_class,unmapped.cpp,True
 PROC_TIMER,492,fopAc_ac_c,unmapped.cpp,True
 PROC_AUCTION_SCREEN,493,fopAc_ac_c,unmapped.cpp,True
 PROC_PLACE_NAME,494,fopAc_ac_c,unmapped.cpp,True

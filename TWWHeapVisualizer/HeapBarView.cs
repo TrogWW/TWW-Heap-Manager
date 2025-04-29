@@ -154,6 +154,7 @@ namespace TWWHeapVisualizer
                     uint.TryParse(tbEnd.Text, NumberStyles.HexNumber, null, out uint re) && rs < re)
                 {
                     HeapHacker.FakeAllocate(selectedFreeBlock, rs, re);
+                    view.filledMemoryBlocks.Add(rs);
                 }
             }
 
@@ -206,7 +207,7 @@ namespace TWWHeapVisualizer
                 else if (isUsed)
                 {
                     paint = isCorrupted
-                        ? new SKPaint { Color = new SKColor(255, 102, 0), IsAntialias = false }
+                        ? new SKPaint { Color = new SKColor(100, 0, 160), IsAntialias = false }
                         : usedPaint;
                 }
                 else paint = freePaint;
@@ -312,7 +313,8 @@ namespace TWWHeapVisualizer
                 var lines = new List<string>();
                 if (hoveredBlock is UsedMemoryBlock usr)
                 {
-                    lines.Add("Used");
+                    bool isCorrupted = view.filledMemoryBlocks.Contains(hoveredBlock.startAddress);
+                    lines.Add("Used" + (isCorrupted ? " (Filled)" : ""));
                     if (!string.IsNullOrEmpty(usr.data?.ToString()))
                         lines.Add(usr.data.ToString());
                     lines.Add($"Index: {usr.index}");

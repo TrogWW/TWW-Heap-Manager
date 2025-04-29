@@ -12,6 +12,8 @@ using TWWHeapVisualizer.Helpers;
 using TWWHeapVisualizer;
 using Timer = System.Windows.Forms.Timer;
 using TWWHeapVisualizer.FormElements;
+using TWWHeapVisualizer.Extensions;
+using System.Reflection.Metadata;
 
 namespace TWWHeapVisualizer
 {
@@ -150,14 +152,14 @@ namespace TWWHeapVisualizer
         {
             get
             {
-                return this.memoryBlocks.Where(b => b is FreeMemoryBlock).Cast<FreeMemoryBlock>().ToList();
+                return this.memoryBlocks.OfType<FreeMemoryBlock>().ToList();
             }
         }
         public List<UsedMemoryBlock> usedBlocks
         {
             get
             {
-                return this.memoryBlocks.Where(b => b is UsedMemoryBlock).Cast<UsedMemoryBlock>().ToList();
+                return this.memoryBlocks.OfType<UsedMemoryBlock>().ToList();
             }
         }
         public Dictionary<uint, fopAc_ac_c> actors;
@@ -165,17 +167,17 @@ namespace TWWHeapVisualizer
         {
             get
             {
-                return this.memoryBlocks.Where(b => b is UsedMemoryBlock).Count();
+                return this.usedBlocks.Count();
             }
         }
         public int freeSlotsCount
         {
             get
             {
-                return this.memoryBlocks.Where(b => b is FreeMemoryBlock).Count();
+                return this.freeBlocks.Count();
             }
         }
-        public uint dataBegin;
+        //public uint dataBegin;
         public uint heapSize;
         public uint dataEnd;
         public string selectedOption = "All";
@@ -254,7 +256,7 @@ namespace TWWHeapVisualizer
                     {
                         if (isFilled)
                         {
-                            backColor = Color.FromArgb(255, 153, 0); // Define the background color for the button
+                            backColor = Color.FromArgb(160, 120, 180); // Define the background color for the button
                         }
                         else
                         {
@@ -331,7 +333,7 @@ namespace TWWHeapVisualizer
                 {
                     if (isFilled)
                     {
-                        buttonBackColor = Color.FromArgb(255, 153, 0); // Define the background color for the button
+                        buttonBackColor = Color.FromArgb(160, 120, 180); // Define the background color for the button
                     }
                     else
                     {
@@ -600,11 +602,16 @@ namespace TWWHeapVisualizer
             this.actors = fopAc_ac_c.GetCreatedActors(fopActQueueAddress);
 
             uint zeldaHeapAddress = Memory.ReadMemory<uint>((ulong)ActorData.zeldaHeapPtr);
-            this.dataBegin = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)dataBeginOffset);
-            this.heapSize = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)heapSizeOffset);
-            this.dataEnd = this.dataBegin + this.heapSize;
+            //this.dataBegin = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)dataBeginOffset);
 
-            memoryBlocks = ReadBlocks(this.dataBegin);
+            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
+            uint usedBlockAddress = Memory.ReadMemory<uint>(heapBase + 0x80);
+            //this.dataBegin = usedBlockAddress;
+            this.heapSize = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)heapSizeOffset);
+            //this.dataEnd = this.dataBegin + this.heapSize;
+
+            memoryBlocks = GetUsedBlocks();
+            memoryBlocks.AddRange(GetFreeBlocks());
             foreach (UsedMemoryBlock usedBlock in usedBlocks.Where(b => MemoryHelpers.isValidAddress(b.gamePtr)))
             {
                 if (this.actors.ContainsKey(usedBlock.gamePtr))
@@ -633,38 +640,100 @@ namespace TWWHeapVisualizer
             this.VirtualListSize = this.memoryBlocks.Count;
             this.Refresh();
         }
-        public static List<IMemoryBlock> ReadBlocks(uint dataBegin)
+        /// <summary>
+        /// Enumerates all free blocks in the heap.
+        /// </summary>
+        public static List<IMemoryBlock> GetFreeBlocks()
         {
-            List<IMemoryBlock> usedBlocks = new List<IMemoryBlock>();
-            int index = 0;
-            UsedMemoryBlock block = new UsedMemoryBlock(dataBegin, index);
-            usedBlocks.Add(block);
-            uint nextBlock = block.nextBlock;
-            while (MemoryHelpers.isValidAddress(nextBlock))
+            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
+            var list = new List<IMemoryBlock>();
+            uint ptr = Memory.ReadMemory<uint>(heapBase + 0x78);
+            while (ptr != 0)
             {
-                index++;
-                block = new UsedMemoryBlock(nextBlock, index);
-                usedBlocks.Add(block);
-                nextBlock = block.nextBlock;
+                var blk = CMemBlock.FromAddress(ptr);
+                var free = new FreeMemoryBlock(ptr, ptr + (blk.size + 0x10));
+                list.Add(free);
+                ptr = blk.mNext;
             }
-            return usedBlocks;
+            return list;
         }
-        private void GetFreeBlocks()
-        {
-            List<FreeMemoryBlock> freeBlocks = new List<FreeMemoryBlock>();
-            for (int i = 0; i < this.memoryBlocks.Count - 1; i++)
-            {
-                IMemoryBlock thisBlock = this.memoryBlocks[i];
-                IMemoryBlock nextBlock = this.memoryBlocks[i + 1];
-                if (thisBlock.endAddress < nextBlock.startAddress)// - 0x20)
-                {
-                    freeBlocks.Add(new FreeMemoryBlock(thisBlock.endAddress, nextBlock.startAddress));// - 0x20));
-                }
 
+        /// <summary>
+        /// Enumerates all used blocks in the heap.
+        /// </summary>
+        public static List<IMemoryBlock> GetUsedBlocks()
+        {
+            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
+            var list = new List<IMemoryBlock>();
+            uint ptr = Memory.ReadMemory<uint>(heapBase + 0x80);
+            int index = 0;
+            while (ptr != 0)
+            {
+                var blk = CMemBlock.FromAddress(ptr);
+                var used = new UsedMemoryBlock(ptr, index);
+                list.Add(used);
+                ptr = blk.mNext;
+                index++;
             }
-            this.memoryBlocks.AddRange(freeBlocks);
-            memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
+            return list;
         }
+        //public static List<IMemoryBlock> ReadBlocks(uint dataBegin)
+        //{
+        //    List<IMemoryBlock> usedBlocks = new List<IMemoryBlock>();
+        //    int index = 0;
+        //    UsedMemoryBlock block = new UsedMemoryBlock(dataBegin, index);
+        //    usedBlocks.Add(block);
+        //    uint nextBlock = block.nextBlock;
+        //    while (MemoryHelpers.isValidAddress(nextBlock))
+        //    {
+        //        index++;
+        //        block = new UsedMemoryBlock(nextBlock, index);
+        //        usedBlocks.Add(block);
+        //        nextBlock = block.nextBlock;
+        //    }
+        //    return usedBlocks;
+        //}
+        //private void GetFreeBlocks()
+        //{
+        //    List<FreeMemoryBlock> freeBlocks = new List<FreeMemoryBlock>();
+        //    const uint OffHeadFreeList = 0x78;
+        //    uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
+        //    uint blockAddress = Memory.ReadMemory<uint>(heapBase + 0x78);
+        //    CMemBlock foundBlock = CMemBlock.FromAddress(blockAddress);
+        //    freeBlocks.Add(new FreeMemoryBlock(blockAddress, blockAddress + foundBlock.size));
+        //    while (true)
+        //    {
+        //        foundBlock = CMemBlock.FromAddress(foundBlock.mNext);
+        //        if (!MemoryHelpers.isValidAddress(foundBlock.mNext))
+        //        {
+        //            break;
+        //        }
+        //        freeBlocks.Add(new FreeMemoryBlock(foundBlock.mNext, foundBlock.mNext + foundBlock.size));
+        //    }
+        //    const uint OffTailFreeList = 0x7C;
+        //    blockAddress = Memory.ReadMemory<uint>(heapBase + 0x7C);
+        //    foundBlock = CMemBlock.FromAddress(blockAddress);
+        //    if(!freeBlocks.Exists(b => b.startAddress == blockAddress))
+        //    {
+        //        freeBlocks.Add(new FreeMemoryBlock(blockAddress, blockAddress + foundBlock.size));
+        //    }
+
+        //    while (true)
+        //    {
+        //        foundBlock = CMemBlock.FromAddress(foundBlock.mPrev);
+        //        if (!MemoryHelpers.isValidAddress(foundBlock.mPrev))
+        //        {
+        //            break;
+        //        }
+        //        if (!freeBlocks.Exists(b => b.startAddress == foundBlock.mPrev))
+        //        {
+        //            freeBlocks.Add(new FreeMemoryBlock(foundBlock.mPrev, foundBlock.mPrev + foundBlock.size));
+        //        }
+
+        //    }
+        //    this.memoryBlocks.AddRange(freeBlocks);
+        //    memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
+        //}
         private void ShowMemoryDataGridViewForm(IMemoryBlock memoryBlock)
         {
             UsedMemoryBlock usedMemoryBlock = (UsedMemoryBlock)memoryBlock;

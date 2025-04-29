@@ -69,15 +69,15 @@ namespace TWWHeapVisualizer.Extensions
             uint nextFree = oldFree.mNext;
 
             // 4) compute content sizes for new fragments
-            uint leftContentSize = regionStart - contentStart;
-            uint rightContentSize = contentEnd - regionEnd;
+            int leftContentSize = (int)regionStart - (int)contentStart;
+            int rightContentSize = (int)contentEnd - (int)regionEnd;
             bool hasLeft = leftContentSize >= HeaderSize;
             bool hasRight = rightContentSize >= HeaderSize;
 
             // header ptrs for new blocks
             uint leftHdr = oldHdr;
-            uint usedHdr = regionStart - HeaderSize;
-            uint rightHdr = regionEnd - HeaderSize;
+            uint usedHdr = regionStart;
+            uint rightHdr = regionEnd;
 
             // 5) write left‐free fragment
             if (hasLeft)
@@ -87,7 +87,7 @@ namespace TWWHeapVisualizer.Extensions
                     mMagic = 0,
                     mFlags = 0,      // clear flags for free fragment,
                     mGroupId = 0,
-                    size = leftContentSize,
+                    size = (uint)leftContentSize,
                     mPrev = prevFree,
                     mNext = hasRight ? rightHdr : nextFree
                 };
@@ -102,7 +102,7 @@ namespace TWWHeapVisualizer.Extensions
                     mMagic = 0,
                     mFlags = oldFree.mFlags,
                     mGroupId = 0,
-                    size = rightContentSize,
+                    size = (uint)rightContentSize,
                     mPrev = hasLeft ? leftHdr : prevFree,
                     mNext = nextFree
                 };
@@ -193,7 +193,7 @@ namespace TWWHeapVisualizer.Extensions
                 mMagic = 0x4D48,                  // 'HM'
                 mFlags = isTail ? (byte)0x80 : (byte)0x00,
                 mGroupId = 0xFF,
-                size = regionEnd - regionStart,
+                size = regionEnd - regionStart - 0x10,
                 mPrev = Memory.ReadMemory<uint>(heapBase + OffTailUsedList),
                 mNext = 0
             };

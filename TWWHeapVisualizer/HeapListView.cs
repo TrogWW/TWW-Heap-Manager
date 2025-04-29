@@ -656,7 +656,7 @@ namespace TWWHeapVisualizer
             {
                 IMemoryBlock thisBlock = this.memoryBlocks[i];
                 IMemoryBlock nextBlock = this.memoryBlocks[i + 1];
-                if (thisBlock.endAddress <= nextBlock.startAddress)// - 0x20)
+                if (thisBlock.endAddress < nextBlock.startAddress)// - 0x20)
                 {
                     freeBlocks.Add(new FreeMemoryBlock(thisBlock.endAddress, nextBlock.startAddress));// - 0x20));
                 }

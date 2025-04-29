@@ -38,7 +38,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
             this.startAddress = startAddress;
             this.unknownValue = Memory.ReadMemory<byte>((ulong)startAddress + (ulong)unkownOffset);
             this.usedOrFree = Memory.ReadMemory<byte>((ulong)startAddress + (ulong)usedOrFreeOffset);
-            this.size = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)sizeOffset);
+            this.size = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)sizeOffset) + 0x10; //Include CMemBlock meta data 
             this.prevBlock = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)prevBlockOffset);
             this.nextBlock = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)nextBlockOffset);
             this.endAddress = this.startAddress + this.size;

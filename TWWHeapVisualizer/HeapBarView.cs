@@ -16,7 +16,7 @@ namespace TWWHeapVisualizer
         private readonly Timer refreshTimer;
         private readonly SKControl skControl;
         private readonly HScrollBar hScrollBar;
-        private readonly HeapListView view;
+        private MemoryBlockCollection _heap;
         private float zoom = 1.0f;
         private float panX = 0f;
 
@@ -32,9 +32,9 @@ namespace TWWHeapVisualizer
         private float selectStartX, selectEndX;
         private FreeMemoryBlock selectedFreeBlock = null;
 
-        public HeapBarForm(HeapListView view)
+        public HeapBarForm(MemoryBlockCollection heap)
         {
-            this.view = view;
+            _heap = heap;
             Text = "Heap Bar Visualizer";
             Width = 1000;
             Height = 380; // extra height for arrow, selection, and summary
@@ -162,7 +162,7 @@ namespace TWWHeapVisualizer
                     {
                         // Single block allocation
                         HeapHacker.FakeAllocate(selectedFreeBlock, rs, re);
-                        view.filledMemoryBlocks.Add(rs);
+                        _heap.filledMemoryBlocks.Add(rs);
                     }
                     else
                     {
@@ -173,7 +173,7 @@ namespace TWWHeapVisualizer
                             uint endAlloc = Math.Min(addr + 32, re);
                             HeapHacker.FakeAllocate(curBlock, addr, endAlloc);
                             
-                            view.filledMemoryBlocks.Add(addr);
+                            _heap.filledMemoryBlocks.Add(addr);
                             curBlock = new FreeMemoryBlock
                             {
                                 size = re - endAlloc,
@@ -191,11 +191,11 @@ namespace TWWHeapVisualizer
 
         private void SkControl_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (view.memoryBlocks.Count == 0)
+            if (_heap.blocks.Count == 0)
                 return;
 
-            heapStart = view.memoryBlocks.Min(b => b.startAddress);
-            heapEnd = view.memoryBlocks.Max(b => b.endAddress);
+            heapStart = _heap.blocks.Min(b => b.startAddress);
+            heapEnd = _heap.blocks.Max(b => b.endAddress);
             heapSize = heapEnd - heapStart;
 
             var canvas = e.Surface.Canvas;
@@ -215,7 +215,7 @@ namespace TWWHeapVisualizer
 
             hoveredBlock = null;
             // Draw blocks
-            foreach (var block in view.memoryBlocks)
+            foreach (var block in _heap.blocks)
             {
                 float rel = block.startAddress - heapStart;
                 float x = rel * pxb - panX;
@@ -223,7 +223,7 @@ namespace TWWHeapVisualizer
                 if (x + w < 0 || x > viewW) continue;
 
                 bool isUsed = block is UsedMemoryBlock;
-                bool isCorrupted = isUsed && view.filledMemoryBlocks.Contains(block.startAddress);
+                bool isCorrupted = isUsed && ((UsedMemoryBlock)block).filled;
 
                 SKPaint paint;
                 if (w < 1f)
@@ -286,7 +286,7 @@ namespace TWWHeapVisualizer
             }
 
             // Arrow to last UsedMemoryBlock by index
-            var lastUsed = view.memoryBlocks.OfType<UsedMemoryBlock>()
+            var lastUsed = _heap.usedBlocks
                 .OrderByDescending(b => b.index)
                 .FirstOrDefault();
             if (lastUsed != null)
@@ -332,7 +332,7 @@ namespace TWWHeapVisualizer
                 var lines = new List<string>();
                 if (hoveredBlock is UsedMemoryBlock usr)
                 {
-                    bool isCorrupted = view.filledMemoryBlocks.Contains(hoveredBlock.startAddress);
+                    bool isCorrupted = usr.filled;
                     lines.Add("Used" + (isCorrupted ? " (Filled)" : ""));
                     if (!string.IsNullOrEmpty(usr.data?.ToString()))
                         lines.Add(usr.data.ToString());
@@ -380,9 +380,9 @@ namespace TWWHeapVisualizer
             float summaryX = 5;
             float summaryY = viewBarHeight + 20;
 
-            long freeSize = view.freeBlocks.Sum(b => b.size);
-            long usedSize = view.usedBlocks.Sum(b => b.size);
-            long maxFree = view.freeBlocks.Max(b => b.size);
+            long freeSize = _heap.freeBlocks.Sum(b => b.size);
+            long usedSize = _heap.usedBlocks.Sum(b => b.size);
+            long maxFree = _heap.freeBlocks.Max(b => b.size);
             long totalSize = freeSize + usedSize;
 
             canvas.DrawText($"Max:  {(float)maxFree / 1000f} KB", summaryX, summaryY, infoPaint);

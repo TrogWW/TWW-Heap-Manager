@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Windows.Forms.VisualStyles;
-using TWWHeapVisualizer.Dolphin;
-using TWWHeapVisualizer.Heap;
 using TWWHeapVisualizer.Heap.MemoryBlocks;
-using TWWHeapVisualizer.Helpers;
-using TWWHeapVisualizer;
 using Timer = System.Windows.Forms.Timer;
 using TWWHeapVisualizer.FormElements;
-using TWWHeapVisualizer.Extensions;
-using System.Reflection.Metadata;
 
 namespace TWWHeapVisualizer
 {
@@ -142,42 +131,7 @@ namespace TWWHeapVisualizer
 
     public class HeapListView : ListView
     {
-        const UInt64 dataBeginOffset = 0x30;
-        const UInt64 heapSizeOffset = 0x38;
-
-        public List<IMemoryBlock> memoryBlocks;
         public List<IMemoryBlock> filteredMemoryBlocks;
-        public List<uint> filledMemoryBlocks; // list of start addresses to mark used blocks as filled (or corrupted)
-        public List<FreeMemoryBlock> freeBlocks
-        {
-            get
-            {
-                return this.memoryBlocks.OfType<FreeMemoryBlock>().ToList();
-            }
-        }
-        public List<UsedMemoryBlock> usedBlocks
-        {
-            get
-            {
-                return this.memoryBlocks.OfType<UsedMemoryBlock>().ToList();
-            }
-        }
-        public Dictionary<uint, fopAc_ac_c> actors;
-        public int usedSlotsCount
-        {
-            get
-            {
-                return this.usedBlocks.Count();
-            }
-        }
-        public int freeSlotsCount
-        {
-            get
-            {
-                return this.freeBlocks.Count();
-            }
-        }
-        //public uint dataBegin;
         public uint heapSize;
         public uint dataEnd;
         public string selectedOption = "All";
@@ -185,16 +139,14 @@ namespace TWWHeapVisualizer
         private Timer _timer;
         private int sortColumn = -1;
         private SortOrder sortOrder = SortOrder.None;
+
+        public MemoryBlockCollection heap { get; set; }
         public HeapListView(Timer timer)
         {
             InitializeListView();
             this._timer = timer;
-            this.memoryBlocks = new List<IMemoryBlock>();
-            this.filledMemoryBlocks = new List<uint>();
-            //this.ListViewItemSorter = new HeapListViewSorter(0, SortOrder.Ascending); // Default sorting by the first column in ascending order
-            
-
         }
+
         private void InitializeListView()
         {
             this.Dock = DockStyle.Fill;
@@ -229,9 +181,9 @@ namespace TWWHeapVisualizer
             {
                 IMemoryBlock block = e.Item.Tag as IMemoryBlock;
                // string tag = e.Item.Tag.ToString();
-                if (block is UsedMemoryBlock)
+                if (block is UsedMemoryBlock uBlock)
                 {
-                    bool isFilled = filledMemoryBlocks.Contains(block.startAddress);
+                    bool isFilled = uBlock.filled;
                     IMemoryBlock hoveredBlock = null;
                     Point localMousePosition = this.PointToClient(ZeldaHeapViewer.MousePosition);
                     var hit = this.HitTest(localMousePosition);
@@ -293,9 +245,9 @@ namespace TWWHeapVisualizer
             // Draw the button in the last column
             // Adjust the button appearance and position as needed
             IMemoryBlock block = e.Item.Tag as IMemoryBlock;
-            if (block is UsedMemoryBlock)
+            if (block is UsedMemoryBlock uBlock)
             {
-                bool isFilled = filledMemoryBlocks.Contains(block.startAddress);
+                bool isFilled = uBlock.filled;
                 int buttonPadding = 0;
                 Rectangle buttonBounds = new Rectangle(e.Bounds.Left + buttonPadding, e.Bounds.Top + buttonPadding,
                                                         e.Bounds.Width - 2 * buttonPadding, e.Bounds.Height - 2 * buttonPadding);
@@ -498,21 +450,6 @@ namespace TWWHeapVisualizer
             }
 
         }
-        public void ApplyFilledMemory()
-        {
-            filledMemoryBlocks.Clear();
-            foreach (var block in memoryBlocks)
-            {
-                if (block is UsedMemoryBlock uBlock)
-                {
-                    filledMemoryBlocks.Add(block.startAddress);
-                }
-            }
-        }
-        public void ClearFilledMemory()
-        {
-            filledMemoryBlocks.Clear();
-        }
         public void ApplyDataFilter()
         {
             this.filterEmptyNames = true;
@@ -575,7 +512,7 @@ namespace TWWHeapVisualizer
             }
 
             // Perform sorting based on the clicked column and sort order
-            SortMemoryBlocks(memoryBlocks);
+            SortMemoryBlocks(heap.blocks);
 
             // Refresh the ListView to update the display
             this.Refresh();
@@ -583,104 +520,43 @@ namespace TWWHeapVisualizer
 
         public void UpdateFilteredList()
         {
-            filteredMemoryBlocks = ApplyFilter(memoryBlocks);
+            filteredMemoryBlocks = ApplyFilter(heap.blocks);
             if(filteredMemoryBlocks.Count == 0)
             {
-                filteredMemoryBlocks = memoryBlocks;
+                filteredMemoryBlocks = heap.blocks;
             }
 
             SortMemoryBlocks(filteredMemoryBlocks);
         }
-        public void UpdateBlocks()
+        public void ApplyFilledMemory()
         {
-            //DynamicModuleControl dmc  = new DynamicModuleControl();
-            memoryBlocks = new List<IMemoryBlock>();
-
-            uint fopActQueueAddress = Memory.ReadMemory<uint>((ulong)ActorData.fopActQueueHead);
-
-            this.actors = fopAc_ac_c.GetCreatedActors(fopActQueueAddress);
-
-            uint zeldaHeapAddress = Memory.ReadMemory<uint>((ulong)ActorData.zeldaHeapPtr);
-            //this.dataBegin = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)dataBeginOffset);
-
-            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
-            uint usedBlockAddress = Memory.ReadMemory<uint>(heapBase + 0x80);
-            //this.dataBegin = usedBlockAddress;
-            this.heapSize = Memory.ReadMemory<uint>((ulong)zeldaHeapAddress + (ulong)heapSizeOffset);
-            //this.dataEnd = this.dataBegin + this.heapSize;
-
-            memoryBlocks = GetUsedBlocks();
-            memoryBlocks.AddRange(GetFreeBlocks());
-            foreach (UsedMemoryBlock usedBlock in usedBlocks.Where(b => MemoryHelpers.isValidAddress(b.gamePtr)))
+            foreach (var block in heap.usedBlocks)
             {
-                if (this.actors.ContainsKey(usedBlock.gamePtr))
-                {
-                    usedBlock.actor = this.actors[usedBlock.gamePtr];
-
-                }
-                //if(usedBlock.itemID != 0 && dmc.Entries.ContainsKey((ushort)usedBlock.itemID))
-                //{
-                //    var entry = dmc.Entries[(ushort)usedBlock.itemID];
-                //    usedBlock.relFileName = entry.relFileName;
-                //    usedBlock.relPointer = entry.relPointer;
-                //}
+                heap.filledMemoryBlocks.Add(block.startAddress);
             }
-            memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
-            // Check if the item being retrieved is a column header
+        }
+        public void ClearFilledMemory()
+        {
+            heap.filledMemoryBlocks.Clear();
+        }
+        public void UpdateList(object sender, EventArgs e)
+        {
+            if(heap == null)
+            {
+                return;
+            }
+            heap.UpdateBlocks();
 
-            GetFreeBlocks();
+            //GetFreeBlocks();
             UpdateFilteredList();
             // Update the visualizer information
             DisplayVisualizerInfo();
         }
-        public void UpdateList(object sender, EventArgs e)
-        {
-
-            UpdateBlocks();
-        }
         public void DisplayVisualizerInfo()
         {
-            this.VirtualListSize = this.memoryBlocks.Count;
+            this.VirtualListSize = heap.blocks.Count;
             this.Refresh();
         }
-        /// <summary>
-        /// Enumerates all free blocks in the heap.
-        /// </summary>
-        public static List<IMemoryBlock> GetFreeBlocks()
-        {
-            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
-            var list = new List<IMemoryBlock>();
-            uint ptr = Memory.ReadMemory<uint>(heapBase + 0x78);
-            while (ptr != 0)
-            {
-                var blk = CMemBlock.FromAddress(ptr);
-                var free = new FreeMemoryBlock(ptr, ptr + (blk.size + 0x10));
-                list.Add(free);
-                ptr = blk.mNext;
-            }
-            return list;
-        }
-
-        /// <summary>
-        /// Enumerates all used blocks in the heap.
-        /// </summary>
-        public static List<IMemoryBlock> GetUsedBlocks()
-        {
-            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
-            var list = new List<IMemoryBlock>();
-            uint ptr = Memory.ReadMemory<uint>(heapBase + 0x80);
-            int index = 0;
-            while (ptr != 0)
-            {
-                var blk = CMemBlock.FromAddress(ptr);
-                var used = new UsedMemoryBlock(ptr, index);
-                list.Add(used);
-                ptr = blk.mNext;
-                index++;
-            }
-            return list;
-        }
-
         private void ShowMemoryDataGridViewForm(IMemoryBlock memoryBlock)
         {
             UsedMemoryBlock usedMemoryBlock = (UsedMemoryBlock)memoryBlock;

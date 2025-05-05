@@ -25,7 +25,7 @@ namespace TWWHeapVisualizer
         private ComboBox comboBoxMemoryBlockType;
         private string ghidraCsvDirectoryPath = "";
         private Timer addressLoopTimer = new Timer();
-
+        private ZeldaBlockCollection zeldaHeap;
         // Constructor
         public ZeldaHeapViewer()
         {
@@ -189,10 +189,8 @@ namespace TWWHeapVisualizer
             CheckBox checkBox = sender as CheckBox;
             if (checkBox.Checked)
             {
-                // Replace with your actual memory block list source
-                List<IMemoryBlock> currentHeapBlocks = heapListView.memoryBlocks;
 
-                heapVisualizerForm = new HeapBarForm(heapListView);
+                heapVisualizerForm = new HeapBarForm(zeldaHeap);
                 heapVisualizerForm.Show();
             }
             else
@@ -354,6 +352,8 @@ namespace TWWHeapVisualizer
                 {
                     MessageBox.Show($"Game version {gameVersion} is not supported.");
                 }
+                zeldaHeap = new ZeldaBlockCollection((uint)ActorData.zeldaHeapPtr, (uint)ActorData.fopActQueueHead);
+                heapListView.heap = zeldaHeap; //TODO: this is dirty
                 addressLoopTimer.Start(); // Start the timer for address loop
                 menuItem.Text = "Disconnect from Dolphin"; // Update menu item text
             }

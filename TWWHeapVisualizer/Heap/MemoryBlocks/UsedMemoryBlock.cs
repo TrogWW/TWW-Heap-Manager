@@ -32,6 +32,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public string relFileName { get; set; }
         public uint relPointer { get; set; }
         public uint gamePtr { get; set; }
+        public bool filled { get; set; } //whether or not block won't be cleared
         public UsedMemoryBlock(uint startAddress, int index)
         {
             this.index = index;

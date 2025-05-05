@@ -12,6 +12,10 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public uint startAddress { get; set; }
         public uint endAddress { get; set; }
         public uint size { get; set; }
+        public FreeMemoryBlock()
+        {
+            
+        }
         public FreeMemoryBlock(uint startAddress, uint endAddress)
         {
             this.startAddress = startAddress;

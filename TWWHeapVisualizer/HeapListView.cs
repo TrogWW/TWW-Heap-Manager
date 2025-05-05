@@ -591,8 +591,7 @@ namespace TWWHeapVisualizer
 
             SortMemoryBlocks(filteredMemoryBlocks);
         }
-
-        public void UpdateList(object sender, EventArgs e)
+        public void UpdateBlocks()
         {
             //DynamicModuleControl dmc  = new DynamicModuleControl();
             memoryBlocks = new List<IMemoryBlock>();
@@ -628,12 +627,16 @@ namespace TWWHeapVisualizer
             }
             memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
             // Check if the item being retrieved is a column header
-            
+
             GetFreeBlocks();
             UpdateFilteredList();
             // Update the visualizer information
             DisplayVisualizerInfo();
+        }
+        public void UpdateList(object sender, EventArgs e)
+        {
 
+            UpdateBlocks();
         }
         public void DisplayVisualizerInfo()
         {
@@ -677,63 +680,7 @@ namespace TWWHeapVisualizer
             }
             return list;
         }
-        //public static List<IMemoryBlock> ReadBlocks(uint dataBegin)
-        //{
-        //    List<IMemoryBlock> usedBlocks = new List<IMemoryBlock>();
-        //    int index = 0;
-        //    UsedMemoryBlock block = new UsedMemoryBlock(dataBegin, index);
-        //    usedBlocks.Add(block);
-        //    uint nextBlock = block.nextBlock;
-        //    while (MemoryHelpers.isValidAddress(nextBlock))
-        //    {
-        //        index++;
-        //        block = new UsedMemoryBlock(nextBlock, index);
-        //        usedBlocks.Add(block);
-        //        nextBlock = block.nextBlock;
-        //    }
-        //    return usedBlocks;
-        //}
-        //private void GetFreeBlocks()
-        //{
-        //    List<FreeMemoryBlock> freeBlocks = new List<FreeMemoryBlock>();
-        //    const uint OffHeadFreeList = 0x78;
-        //    uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
-        //    uint blockAddress = Memory.ReadMemory<uint>(heapBase + 0x78);
-        //    CMemBlock foundBlock = CMemBlock.FromAddress(blockAddress);
-        //    freeBlocks.Add(new FreeMemoryBlock(blockAddress, blockAddress + foundBlock.size));
-        //    while (true)
-        //    {
-        //        foundBlock = CMemBlock.FromAddress(foundBlock.mNext);
-        //        if (!MemoryHelpers.isValidAddress(foundBlock.mNext))
-        //        {
-        //            break;
-        //        }
-        //        freeBlocks.Add(new FreeMemoryBlock(foundBlock.mNext, foundBlock.mNext + foundBlock.size));
-        //    }
-        //    const uint OffTailFreeList = 0x7C;
-        //    blockAddress = Memory.ReadMemory<uint>(heapBase + 0x7C);
-        //    foundBlock = CMemBlock.FromAddress(blockAddress);
-        //    if(!freeBlocks.Exists(b => b.startAddress == blockAddress))
-        //    {
-        //        freeBlocks.Add(new FreeMemoryBlock(blockAddress, blockAddress + foundBlock.size));
-        //    }
 
-        //    while (true)
-        //    {
-        //        foundBlock = CMemBlock.FromAddress(foundBlock.mPrev);
-        //        if (!MemoryHelpers.isValidAddress(foundBlock.mPrev))
-        //        {
-        //            break;
-        //        }
-        //        if (!freeBlocks.Exists(b => b.startAddress == foundBlock.mPrev))
-        //        {
-        //            freeBlocks.Add(new FreeMemoryBlock(foundBlock.mPrev, foundBlock.mPrev + foundBlock.size));
-        //        }
-
-        //    }
-        //    this.memoryBlocks.AddRange(freeBlocks);
-        //    memoryBlocks = memoryBlocks.OrderBy(b => b.startAddress).ToList();
-        //}
         private void ShowMemoryDataGridViewForm(IMemoryBlock memoryBlock)
         {
             UsedMemoryBlock usedMemoryBlock = (UsedMemoryBlock)memoryBlock;

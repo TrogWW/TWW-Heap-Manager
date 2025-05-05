@@ -28,6 +28,7 @@ PROC_WPOT_WATER,25,fopAc_ac_c,unmapped.cpp,True
 PROC_LEVEL_SE,26,fopAc_ac_c,unmapped.cpp,True
 PROC_THROWSTONE,27,fopAc_ac_c,unmapped.cpp,True
 PROC_TAG_EVSW,28,Act_c,d_a_tag_evsw.cpp,True
+PROC_Obj_Swheavy,30,daObjSwheavy,unmapped.cpp,False
 PROC_TAG_SO,37,daTag_So_c,d_a_tag_so.cpp,True
 PROC_SEATAG,39,daSeatag_c,d_a_seatag.cpp,False
 PROC_SEA,40,sea_class,d_a_sea.cpp,False

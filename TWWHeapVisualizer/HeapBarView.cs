@@ -37,7 +37,7 @@ namespace TWWHeapVisualizer
             this.view = view;
             Text = "Heap Bar Visualizer";
             Width = 1000;
-            Height = 360; // extra height for arrow and selection
+            Height = 380; // extra height for arrow, selection, and summary
 
             skControl = new SKControl { Dock = DockStyle.Fill };
             skControl.PaintSurface += SkControl_PaintSurface;
@@ -66,7 +66,6 @@ namespace TWWHeapVisualizer
 
         private void OnMouseDown_Select(object sender, MouseEventArgs e)
         {
-            // Start selection only within a free block
             if (hoveredBlock is FreeMemoryBlock free)
             {
                 isSelecting = true;
@@ -108,18 +107,17 @@ namespace TWWHeapVisualizer
             uint addrStart = (uint)(heapStart + (sx / pxb));
             uint addrEnd = (uint)(heapStart + (ex / pxb));
 
-            // Clamp to free block bounds
             addrStart = Math.Max(addrStart, selectedFreeBlock.startAddress);
             addrEnd = Math.Min(addrEnd, selectedFreeBlock.endAddress);
 
-            // Show refine allocation dialog
+            // Show Refine Allocation dialog
             using var dlg = new Form
             {
                 Text = "Refine Allocation",
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterParent,
                 Width = 380,
-                Height = 220,
+                Height = 260,
                 MaximizeBox = false,
                 MinimizeBox = false
             };
@@ -127,11 +125,14 @@ namespace TWWHeapVisualizer
             var tbStart = new TextBox { Text = addrStart.ToString("X"), Left = 160, Top = 10, Width = 200 };
             var lblEnd = new Label { Text = "End Address (hex):", Left = 10, Top = 40, Width = 150 };
             var tbEnd = new TextBox { Text = addrEnd.ToString("X"), Left = 160, Top = 40, Width = 200 };
-            var lblSize = new Label { Text = "Region Size (KB):", Left = 10, Top = 70, Width = 150 };
-            var tbSize = new TextBox { Left = 160, Top = 70, Width = 200, ReadOnly = true };
-            var btnOk = new Button { Text = "OK", Left = 160, Top = 110, Width = 80, DialogResult = DialogResult.OK };
-            var btnCancel = new Button { Text = "Cancel", Left = 260, Top = 110, Width = 80, DialogResult = DialogResult.Cancel };
-            dlg.Controls.AddRange(new Control[] { lblStart, tbStart, lblEnd, tbEnd, lblSize, tbSize, btnOk, btnCancel });
+            var lblFrag = new Label { Text = "Fragment Size (bytes):", Left = 10, Top = 70, Width = 150 };
+            var tbFrag = new TextBox { Text = "0", Left = 160, Top = 70, Width = 200 };
+            var lblSize = new Label { Text = "Region Size (KB):", Left = 10, Top = 100, Width = 150 };
+            var tbSize = new TextBox { Left = 160, Top = 100, Width = 200, ReadOnly = true };
+            var btnOk = new Button { Text = "OK", Left = 160, Top = 140, Width = 80, DialogResult = DialogResult.OK };
+            var btnCancel = new Button { Text = "Cancel", Left = 260, Top = 140, Width = 80, DialogResult = DialogResult.Cancel };
+
+            dlg.Controls.AddRange(new Control[] { lblStart, tbStart, lblEnd, tbEnd, lblFrag, tbFrag, lblSize, tbSize, btnOk, btnCancel });
             dlg.AcceptButton = btnOk;
             dlg.CancelButton = btnCancel;
 
@@ -153,8 +154,34 @@ namespace TWWHeapVisualizer
                 if (uint.TryParse(tbStart.Text, NumberStyles.HexNumber, null, out uint rs) &&
                     uint.TryParse(tbEnd.Text, NumberStyles.HexNumber, null, out uint re) && rs < re)
                 {
-                    HeapHacker.FakeAllocate(selectedFreeBlock, rs, re);
-                    view.filledMemoryBlocks.Add(rs);
+                    int fragSize = 0;
+                    if (int.TryParse(tbFrag.Text, out int f) && f > 0)
+                        fragSize = f;
+
+                    if (fragSize <= 0)
+                    {
+                        // Single block allocation
+                        HeapHacker.FakeAllocate(selectedFreeBlock, rs, re);
+                        view.filledMemoryBlocks.Add(rs);
+                    }
+                    else
+                    {
+                        FreeMemoryBlock curBlock = selectedFreeBlock;
+                        // Fragmented allocation: max block size = fragSize
+                        for (uint addr = rs; addr < re; addr += (uint)fragSize)
+                        {
+                            uint endAlloc = Math.Min(addr + 32, re);
+                            HeapHacker.FakeAllocate(curBlock, addr, endAlloc);
+                            
+                            view.filledMemoryBlocks.Add(addr);
+                            curBlock = new FreeMemoryBlock
+                            {
+                                size = re - endAlloc,
+                                startAddress = endAlloc,
+                                endAddress = re
+                            };
+                        }
+                    }
                 }
             }
 
@@ -175,7 +202,7 @@ namespace TWWHeapVisualizer
             var info = e.Info;
             float viewW = info.Width;
             float viewH = info.Height;
-            float viewBarHeight = viewH - 40;
+            float viewBarHeight = viewH - 60; // expanded to make room for summary
             float scaledW = viewW * zoom;
             float pxb = scaledW / heapSize;
 
@@ -232,15 +259,11 @@ namespace TWWHeapVisualizer
             // Draw marquee selection with KB overlay
             if (isSelecting && selectedFreeBlock != null)
             {
-                // Position/size of marquee in screen coords
                 float sx = Math.Min(selectStartX, selectEndX);
                 float sw = Math.Abs(selectEndX - selectStartX);
-
-                // Draw translucent blue rectangle
                 using var selPaint = new SKPaint { Color = new SKColor(0, 120, 255, 100), IsAntialias = false };
                 canvas.DrawRect(sx, 0, sw, viewBarHeight, selPaint);
 
-                // Compute world addresses for marquee edges
                 float worldStartX = sx + panX;
                 float worldEndX = sx + sw + panX;
                 uint addr0 = (uint)(heapStart + (worldStartX / pxb));
@@ -248,11 +271,9 @@ namespace TWWHeapVisualizer
                 float sizeKB = (addr1 - addr0) / 1024f;
                 string sizeLabel = $"{sizeKB:F2} KB";
 
-                // Draw size label centered in marquee
                 using var font = new SKFont(SKTypeface.Default, 14);
                 using var tp = new SKPaint { Color = SKColors.White, IsAntialias = true };
                 using var bg = new SKPaint { Color = SKColors.Black.WithAlpha(180), IsAntialias = true };
-
                 font.MeasureText(sizeLabel, out SKRect bounds);
                 float pad = 4;
                 float bwx = bounds.Width + pad * 2;
@@ -260,7 +281,6 @@ namespace TWWHeapVisualizer
                 float mid = sx + sw / 2;
                 float bx2 = mid - bwx / 2;
                 float by2 = viewBarHeight / 2 - bhx / 2;
-
                 canvas.DrawRect(bx2, by2, bwx, bhx, bg);
                 canvas.DrawText(sizeLabel, bx2 + pad, by2 + pad - bounds.Top, SKTextAlign.Left, font, tp);
             }
@@ -278,7 +298,6 @@ namespace TWWHeapVisualizer
                 {
                     float cx = x + w / 2;
                     float arrowY = viewBarHeight + 4;
-
                     using var ap = new SKPaint { Color = SKColors.White, IsAntialias = true, Style = SKPaintStyle.Fill };
                     using var path = new SKPath();
                     path.MoveTo(cx, arrowY);
@@ -325,7 +344,6 @@ namespace TWWHeapVisualizer
                 }
                 lines.Add($"Start: 0x{hoveredBlock.startAddress:X8}");
                 lines.Add($"Size : {hoveredBlock.size}");
-
                 using var font = new SKFont(SKTypeface.Default, 14);
                 using var tp = new SKPaint { Color = SKColors.White, IsAntialias = true };
                 using var bg = new SKPaint { Color = SKColors.Black.WithAlpha(180), IsAntialias = true };
@@ -344,7 +362,6 @@ namespace TWWHeapVisualizer
                 float bx = mouseX + 15;
                 if (bx + bw > e.Info.Width) bx = mouseX - bw - 15;
                 float by = 30;
-
                 canvas.DrawRect(bx, by, bw, bh, bg);
                 for (int i = 0; i < lines.Count; i++)
                 {
@@ -352,6 +369,25 @@ namespace TWWHeapVisualizer
                     canvas.DrawText(lines[i], bx + padding, ty, SKTextAlign.Left, font, tp);
                 }
             }
+
+            // Draw summary data at bottom-left
+            using var infoPaint = new SKPaint
+            {
+                Color = SKColors.White,
+                TextSize = 12,
+                IsAntialias = true
+            };
+            float summaryX = 5;
+            float summaryY = viewBarHeight + 20;
+
+            long freeSize = view.freeBlocks.Sum(b => b.size);
+            long usedSize = view.usedBlocks.Sum(b => b.size);
+            long maxFree = view.freeBlocks.Max(b => b.size);
+            long totalSize = freeSize + usedSize;
+
+            canvas.DrawText($"Max:  {(float)maxFree / 1000f} KB", summaryX, summaryY, infoPaint);
+            canvas.DrawText($"Free:  {(float)freeSize / 1000f} KB", summaryX, summaryY + 15, infoPaint);
+            canvas.DrawText($"Total: {(float)totalSize / 1000f} KB", summaryX, summaryY + 30, infoPaint);
         }
 
         private void SkControl_MouseWheel(object sender, MouseEventArgs e)

@@ -32,10 +32,10 @@ namespace TWWHeapVisualizer
         private float selectStartX, selectEndX;
         private FreeMemoryBlock selectedFreeBlock = null;
 
-        public HeapBarForm(MemoryBlockCollection heap)
+        public HeapBarForm(MemoryBlockCollection heap, string title)
         {
             _heap = heap;
-            Text = "Heap Bar Visualizer";
+            Text = title;
             Width = 1000;
             Height = 380; // extra height for arrow, selection, and summary
 
@@ -161,7 +161,7 @@ namespace TWWHeapVisualizer
                     if (fragSize <= 0)
                     {
                         // Single block allocation
-                        HeapHacker.FakeAllocate(selectedFreeBlock, rs, re);
+                        HeapHacker.FakeAllocate(_heap.baseAddress, selectedFreeBlock, rs, re);
                         _heap.filledMemoryBlocks.Add(rs);
                     }
                     else
@@ -171,7 +171,7 @@ namespace TWWHeapVisualizer
                         for (uint addr = rs; addr < re; addr += (uint)fragSize)
                         {
                             uint endAlloc = Math.Min(addr + 32, re);
-                            HeapHacker.FakeAllocate(curBlock, addr, endAlloc);
+                            HeapHacker.FakeAllocate(_heap.baseAddress, curBlock, addr, endAlloc);
                             
                             _heap.filledMemoryBlocks.Add(addr);
                             curBlock = new FreeMemoryBlock

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TWWHeapVisualizer.Dolphin;
 using TWWHeapVisualizer.Extensions;
 
@@ -15,6 +16,8 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         protected uint _mTailFreeList; //0x7C
         protected uint _mHeadUsedList; //0x80
         protected uint _mTailUsedList; //0x84
+
+        public uint baseAddress { get { return _baseAddress; } }
         public int size { get; set; }
         public List<IMemoryBlock> blocks { get; set; }
         public List<FreeMemoryBlock> freeBlocks { get; set; } 
@@ -37,6 +40,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public MemoryBlockCollection(uint baseAddress)
         {
             _baseAddress = baseAddress;
+
 
             blocks = new List<IMemoryBlock>();
             freeBlocks = new List<FreeMemoryBlock>();
@@ -85,6 +89,17 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
                 ptr = blk.mNext;
                 index++;
             }
+        }
+        public void ApplyFilledMemory()
+        {
+            foreach (var block in usedBlocks)
+            {
+                filledMemoryBlocks.Add(block.startAddress);
+            }
+        }
+        public void ClearFilledMemory()
+        {
+            filledMemoryBlocks.Clear();
         }
     }
 }

@@ -18,7 +18,10 @@ namespace TWWHeapVisualizer
     {
         // Declare form controls and variables
         private HeapListView heapListView;
-        private HeapBarForm heapVisualizerForm;
+        private HeapBarForm zeldaHeapVisualizerForm;
+        private HeapBarForm actHeapVisualizerForm;
+        private HeapBarForm gameHeapVisualizerForm;
+        private HeapBarForm commandHeapVisualizerForm;
         private MenuStrip menuStrip;
         private Panel mainPanel;
         private LoadingForm loadingForm;
@@ -26,6 +29,9 @@ namespace TWWHeapVisualizer
         private string ghidraCsvDirectoryPath = "";
         private Timer addressLoopTimer = new Timer();
         private ZeldaBlockCollection zeldaHeap;
+        MemoryBlockCollection actHeap;
+        MemoryBlockCollection gameHeap;
+        MemoryBlockCollection commandHeap;
         // Constructor
         public ZeldaHeapViewer()
         {
@@ -74,6 +80,7 @@ namespace TWWHeapVisualizer
 
             ToolStripMenuItem fileMenu = new ToolStripMenuItem("File");
             ToolStripMenuItem editMenu = new ToolStripMenuItem("Edit");
+            ToolStripMenuItem viewHeapMenu = new ToolStripMenuItem("View Heap");
             ToolStripMenuItem helpMenu = new ToolStripMenuItem("Help");
 
             // File menu items
@@ -85,6 +92,12 @@ namespace TWWHeapVisualizer
             // Edit menu items
             ToolStripMenuItem markUsedAsFilled = new ToolStripMenuItem("Mark Used Blocks as Filled");
             ToolStripMenuItem markUsedAsCleared = new ToolStripMenuItem("Mark Used Blocks as Cleared");
+
+            // View menu items
+            ToolStripMenuItem viewZeldaHeap = new ToolStripMenuItem("Zelda (DYN)");
+            ToolStripMenuItem viewArchiveHeap = new ToolStripMenuItem("Achive (ACT)");
+            ToolStripMenuItem viewGameHeap = new ToolStripMenuItem("Game");
+            ToolStripMenuItem viewCommandHeap = new ToolStripMenuItem("Command");
             // Help menu items
             ToolStripMenuItem aboutMenuItem = new ToolStripMenuItem("Github");
 
@@ -98,6 +111,16 @@ namespace TWWHeapVisualizer
             editMenu.DropDownItems.Add(markUsedAsFilled);
             editMenu.DropDownItems.Add(markUsedAsCleared);
 
+            // Add heap menu items
+            viewHeapMenu.DropDownItems.Add(viewZeldaHeap);
+            viewHeapMenu.DropDownItems.Add(viewArchiveHeap);
+            viewHeapMenu.DropDownItems.Add(viewGameHeap);
+            viewHeapMenu.DropDownItems.Add(viewCommandHeap);
+            // Add heap menu events
+            viewZeldaHeap.Click += ViewZeldaHeap_Click;
+            viewArchiveHeap.Click += ViewArchiveHeap_Click;
+            viewGameHeap.Click += ViewGameHeap_Click;
+            viewCommandHeap.Click += ViewCommandHeap_Click;
             // Add help menu items
             helpMenu.DropDownItems.Add(aboutMenuItem);
 
@@ -128,6 +151,7 @@ namespace TWWHeapVisualizer
             // Add menus to MenuStrip
             menuStrip.Items.Add(fileMenu);
             menuStrip.Items.Add(editMenu);
+            menuStrip.Items.Add(viewHeapMenu);
             menuStrip.Items.Add(helpMenu);
 
             // Set MenuStrip as the menu of the form
@@ -137,8 +161,64 @@ namespace TWWHeapVisualizer
             this.Controls.Add(menuStrip);
         }
 
+        private void ViewCommandHeap_Click(object? sender, EventArgs e)
+        {
+            commandHeap = new MemoryBlockCollection((uint)ActorData.commandHeapPtr);
+            addressLoopTimer.Tick += CommandHeap_Tick;
+            commandHeapVisualizerForm = new HeapBarForm(commandHeap, "Command Heap (COMMAND)");
+            commandHeapVisualizerForm.FormClosed += CommandHeap_Closed;
+            commandHeapVisualizerForm.Show();
+        }
 
+        private void CommandHeap_Closed(object? sender, FormClosedEventArgs e)
+        {
+            addressLoopTimer.Tick -= CommandHeap_Tick;
+        }
 
+        private void CommandHeap_Tick(object? sender, EventArgs e)
+        {
+            commandHeap.UpdateBlocks();
+        }
+
+        private void ViewGameHeap_Click(object? sender, EventArgs e)
+        {
+            gameHeap = new MemoryBlockCollection((uint)ActorData.gameHeapPtr);
+            addressLoopTimer.Tick += GameHeap_Tick;
+            gameHeapVisualizerForm = new HeapBarForm(gameHeap, "Game Heap (GAME)");
+            gameHeapVisualizerForm.FormClosed += GameHeap_Closed;
+            gameHeapVisualizerForm.Show();
+        }
+        private void GameHeap_Closed(object? sender, FormClosedEventArgs e)
+        {
+            addressLoopTimer.Tick -= GameHeap_Tick;
+        }
+        private void GameHeap_Tick(object? sender, EventArgs e)
+        {
+            gameHeap.UpdateBlocks();
+        }
+        private void ViewArchiveHeap_Click(object? sender, EventArgs e)
+        {
+            actHeap = new MemoryBlockCollection((uint)ActorData.actHeapPtr);
+            addressLoopTimer.Tick += ArchiveHeap_Tick;
+            actHeapVisualizerForm = new HeapBarForm(actHeap, "Archive Heap (ACT)");
+            actHeapVisualizerForm.FormClosed += ArchiveHeap_Closed;
+            actHeapVisualizerForm.Show();
+        }
+
+        private void ArchiveHeap_Closed(object? sender, FormClosedEventArgs e)
+        {
+            addressLoopTimer.Tick -= ArchiveHeap_Tick;
+        }
+
+        private void ArchiveHeap_Tick(object? sender, EventArgs e)
+        {
+            actHeap.UpdateBlocks();
+        }
+        private void ViewZeldaHeap_Click(object? sender, EventArgs e)
+        {
+            zeldaHeapVisualizerForm = new HeapBarForm(zeldaHeap, "Zelda Heap (DYN)");
+            zeldaHeapVisualizerForm.Show();
+        }
 
         private void InitializeComboBoxMemoryBlockType()
         {
@@ -155,16 +235,6 @@ namespace TWWHeapVisualizer
             hostComboBox.Padding = new Padding(30, 0, 0, 0);
             hostComboBox.Alignment = ToolStripItemAlignment.Right;
 
-            // New checkbox for enabling bar view
-            CheckBox checkBoxBarView = new CheckBox();
-            checkBoxBarView.Text = "Enable Bar View";
-            checkBoxBarView.CheckedChanged += CheckBoxBarView_CheckedChanged;
-
-            ToolStripControlHost hostCheckBoxBarView = new ToolStripControlHost(checkBoxBarView);
-            hostCheckBoxBarView.AutoSize = false;
-            hostCheckBoxBarView.Size = new Size(150, menuStrip.Height);
-            hostCheckBoxBarView.Alignment = ToolStripItemAlignment.Right;
-
             // Existing checkbox for hiding empty name data
             CheckBox checkBoxFilter = new CheckBox();
             checkBoxFilter.Text = "Hide Empty Name Data";
@@ -179,28 +249,7 @@ namespace TWWHeapVisualizer
             // Add items to menu strip in reverse visual order (right to left)
             menuStrip.Items.Add(hostComboBox);
             menuStrip.Items.Add(hostCheckBoxFilter);
-            menuStrip.Items.Add(hostCheckBoxBarView); // Inserted to the left of the previous one
         }
-
-
-
-        private void CheckBoxBarView_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-            if (checkBox.Checked)
-            {
-
-                heapVisualizerForm = new HeapBarForm(zeldaHeap);
-                heapVisualizerForm.Show();
-            }
-            else
-            {
-                heapVisualizerForm?.Close();
-                heapVisualizerForm = null;
-            }
-        }
-
-
 
         // Event handler for ComboBox memory block type selection change
         private void ComboBoxMemoryBlockType_SelectedIndexChanged(object sender, EventArgs e)
@@ -245,7 +294,11 @@ namespace TWWHeapVisualizer
                 case "NTSC-U":
                     ActorData.fopActQueueHead = 0x80372028;
                     ActorData.zeldaHeapPtr = 0x803F6928;
-                    ActorData.objectNameTableAddress = 0x80372818; //803398D8
+                    ActorData.gameHeapPtr = 0x803F6920;
+                    ActorData.actHeapPtr = 0x803F6938;
+                    ActorData.commandHeapPtr = 0x803F6930;
+                    ActorData.objectNameTableAddress = 0x80372818;
+
                     DynamicModuleControl.StartAddress = 0x803B9218;
                     DynamicNameTable.StartAddress = 0x803398D8;
                     ActorData.Instance.InitializeData();
@@ -253,7 +306,11 @@ namespace TWWHeapVisualizer
                 case "JP":
                     ActorData.fopActQueueHead = 0x803654CC;
                     ActorData.zeldaHeapPtr = 0x803E9E00;
-                    ActorData.objectNameTableAddress = 0x80365CB8; 
+                    ActorData.gameHeapPtr = 0x803E9DF8;
+                    ActorData.actHeapPtr = 0x803E9E10;
+                    ActorData.commandHeapPtr = 0x803E9E08;
+                    ActorData.objectNameTableAddress = 0x80365CB8;
+
                     DynamicModuleControl.StartAddress = 0;
                     DynamicNameTable.StartAddress = 0;
                     ActorData.Instance.InitializeData();
@@ -264,11 +321,35 @@ namespace TWWHeapVisualizer
         }
         private void MarkUsedAsFilled_Click(object? sender, EventArgs e)
         {
-            heapListView.ApplyFilledMemory();
+            zeldaHeap.ApplyFilledMemory();
+            if(actHeap != null)
+            {
+                actHeap.ApplyFilledMemory();
+            }
+            if (gameHeap != null)
+            {
+                gameHeap.ApplyFilledMemory();
+            }
+            if (commandHeap != null)
+            {
+                commandHeap.ApplyFilledMemory();
+            }
         }
         private void MarkUsedAsCleared_Click(object? sender, EventArgs e)
         {
-            heapListView.ClearFilledMemory();
+            zeldaHeap.ClearFilledMemory();
+            if (actHeap != null)
+            {
+                actHeap.ClearFilledMemory();
+            }
+            if (gameHeap != null)
+            {
+                gameHeap.ClearFilledMemory();
+            }
+            if (commandHeap != null)
+            {
+                commandHeap.ClearFilledMemory();
+            }
         }
 
         // Event handler for CheckBox filter change

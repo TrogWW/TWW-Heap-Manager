@@ -50,13 +50,14 @@ namespace TWWHeapVisualizer.Extensions
         /// handling tail‐of‐heap allocations correctly.
         /// </summary>
         public static void FakeAllocate(
+            uint heapPtr,
             IMemoryBlock freeBlock,
             uint regionStart,
             uint regionEnd
         )
         {
             // 1) get heap base
-            uint heapBase = Memory.ReadMemory<uint>(ActorData.zeldaHeapPtr);
+            uint heapBase = Memory.ReadMemory<uint>(heapPtr);
 
             // 2) compute header and content bounds
             uint oldHdr = freeBlock.startAddress;      // header address

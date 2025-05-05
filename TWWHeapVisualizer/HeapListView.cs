@@ -528,17 +528,6 @@ namespace TWWHeapVisualizer
 
             SortMemoryBlocks(filteredMemoryBlocks);
         }
-        public void ApplyFilledMemory()
-        {
-            foreach (var block in heap.usedBlocks)
-            {
-                heap.filledMemoryBlocks.Add(block.startAddress);
-            }
-        }
-        public void ClearFilledMemory()
-        {
-            heap.filledMemoryBlocks.Clear();
-        }
         public void UpdateList(object sender, EventArgs e)
         {
             if(heap == null)

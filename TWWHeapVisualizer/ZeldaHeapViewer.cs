@@ -182,7 +182,7 @@ namespace TWWHeapVisualizer
 
         private void ViewGameHeap_Click(object? sender, EventArgs e)
         {
-            gameHeap = new MemoryBlockCollection((uint)ActorData.gameHeapPtr);
+            gameHeap = new GameBlockCollection((uint)ActorData.gameHeapPtr,zeldaHeap);
             addressLoopTimer.Tick += GameHeap_Tick;
             gameHeapVisualizerForm = new HeapBarForm(gameHeap, "Game Heap (GAME)");
             gameHeapVisualizerForm.FormClosed += GameHeap_Closed;

@@ -165,6 +165,7 @@ PROC_BOSSITEM,258,bossitem_class,d_a_boss_item.cpp,False
 PROC_RACEITEM,260,daRaceItem_c,d_a_race_item.cpp,False
 PROC_DEKU_ITEM,262,daDekuItem_c,d_a_deku_item.cpp,True
 PROC_SPC_ITEM01,263,daSpcItem01_c,d_a_spc_item01.cpp,False
+PROC_Obj_Paper,264,daObjPaper,unmapped.cpp,False
 PROC_TBOX,294,daTbox_c,d_a_tbox.cpp,False
 PROC_SBOX,295,daSbox_c,d_a_sbox.cpp,True
 PROC_BOMB,296,daBomb_c,d_a_bomb.cpp,True

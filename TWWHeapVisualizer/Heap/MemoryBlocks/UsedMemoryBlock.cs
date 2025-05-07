@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TWWHeapVisualizer.Dolphin;
+using TWWHeapVisualizer.Helpers;
 
 namespace TWWHeapVisualizer.Heap.MemoryBlocks
 {

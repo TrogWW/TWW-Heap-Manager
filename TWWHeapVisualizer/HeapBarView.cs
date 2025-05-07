@@ -335,7 +335,7 @@ namespace TWWHeapVisualizer
                     bool isCorrupted = usr.filled;
                     lines.Add("Used" + (isCorrupted ? " (Filled)" : ""));
                     if (!string.IsNullOrEmpty(usr.data?.ToString()))
-                        lines.Add(usr.data.ToString());
+                        lines.Add("DYN: " + usr.data.ToString());
                     lines.Add($"Index: {usr.index}");
                 }
                 else

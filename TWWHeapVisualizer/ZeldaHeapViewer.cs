@@ -10,6 +10,7 @@ using TWWHeapVisualizer.FormElements;
 using TWWHeapVisualizer.Heap;
 using TWWHeapVisualizer.Heap.DataStructTypes.GhidraParsing;
 using TWWHeapVisualizer.Heap.MemoryBlocks;
+using TWWHeapVisualizer.Helpers;
 using Timer = System.Windows.Forms.Timer;
 
 namespace TWWHeapVisualizer
@@ -81,6 +82,7 @@ namespace TWWHeapVisualizer
             ToolStripMenuItem fileMenu = new ToolStripMenuItem("File");
             ToolStripMenuItem editMenu = new ToolStripMenuItem("Edit");
             ToolStripMenuItem viewHeapMenu = new ToolStripMenuItem("View Heap");
+            ToolStripMenuItem globalsMenu = new ToolStripMenuItem("Globals");
             ToolStripMenuItem helpMenu = new ToolStripMenuItem("Help");
 
             // File menu items
@@ -98,6 +100,9 @@ namespace TWWHeapVisualizer
             ToolStripMenuItem viewArchiveHeap = new ToolStripMenuItem("Achive (ACT)");
             ToolStripMenuItem viewGameHeap = new ToolStripMenuItem("Game");
             ToolStripMenuItem viewCommandHeap = new ToolStripMenuItem("Command");
+
+            // Globals menu items
+            Globals.PopulateGlobalsMenu(globalsMenu, addressLoopTimer);
             // Help menu items
             ToolStripMenuItem aboutMenuItem = new ToolStripMenuItem("Github");
 
@@ -152,6 +157,7 @@ namespace TWWHeapVisualizer
             menuStrip.Items.Add(fileMenu);
             menuStrip.Items.Add(editMenu);
             menuStrip.Items.Add(viewHeapMenu);
+            menuStrip.Items.Add(globalsMenu);
             menuStrip.Items.Add(helpMenu);
 
             // Set MenuStrip as the menu of the form
@@ -292,6 +298,9 @@ namespace TWWHeapVisualizer
             switch (version)
             {
                 case "NTSC-U":
+                    Globals.g_dComIfG_gameInfo = 0x803c4c08;
+                    Globals.dStage_roomControl_c__mStatus = 0x803bdc88;
+
                     ActorData.fopActQueueHead = 0x80372028;
                     ActorData.zeldaHeapPtr = 0x803F6928;
                     ActorData.gameHeapPtr = 0x803F6920;
@@ -304,6 +313,9 @@ namespace TWWHeapVisualizer
                     ActorData.Instance.InitializeData();
                     break;
                 case "JP":
+                    Globals.g_dComIfG_gameInfo = 0x803b8108;
+                    Globals.dStage_roomControl_c__mStatus = 0x803b1188;
+
                     ActorData.fopActQueueHead = 0x803654CC;
                     ActorData.zeldaHeapPtr = 0x803E9E00;
                     ActorData.gameHeapPtr = 0x803E9DF8;

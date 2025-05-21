@@ -33,6 +33,7 @@ PROC_TAG_SO,37,daTag_So_c,d_a_tag_so.cpp,True
 PROC_SEATAG,39,daSeatag_c,d_a_seatag.cpp,False
 PROC_SEA,40,sea_class,d_a_sea.cpp,False
 PROC_SCENECHG,43,d_a_scene_change_c,d_a_scene_change.cpp,False
+PROC_Obj_Movebox,45,fopAc_ac_c,unmapped.cpp,True        
 PROC_MGBOARD,64,fopAc_ac_c,unmapped.cpp,True
 PROC_OBJ_CANON,65,daObj_Canon_c,d_a_obj_canon.cpp,True
 PROC_OBJ_OTBLE,66,Act_c,d_a_obj_otble.cpp,True
@@ -76,6 +77,8 @@ PROC_NPC_SO,120,daNpc_So_c,d_a_npc_so.cpp,True
 PROC_FM,121,daFm_c,d_a_fm.cpp,True
 PROC_LEAF_LIFT,122,daLlift_c,d_a_leaflift.cpp,True
 PROC_TOGE,124,daToge_c,d_a_toge.cpp,True
+PROC_Obj_Htetu1,139,daObjHtetu1_c,unmapped.cpp,False
+PROC_Obj_Kanoke,161,daObjKanoke_c,unmapped.cpp,False
 PROC_SHIP,167,daShip_c,d_a_ship.cpp,True
 PROC_PLAYER,169,daPy_lk_c,d_a_player_main.cpp,False
 PROC_HOOKSHOT,170,daHookshot_c,d_a_hookshot.cpp,False
@@ -316,10 +319,13 @@ PROC_TAG_GSHIP,458,daTag_Gship_c,d_a_tag_ghostship.cpp,False
 PROC_TSUBO,459,fopAc_ac_c,d_a_tsubo.cpp,True
 PROC_STONE,460,Act_c,d_a_stone.cpp,True
 PROC_BARREL_2,463,daObjBarrel2,d_a_barrel2.cpp,False
+PROC_Obj_Try,464,daObjTry,unmapped.cpp,True
 PROC_STANDITEM,468,fopAc_ac_c,unmapped.cpp,True
 PROC_BOKO,469,daBoko_c,d_a_boko.cpp,True
 PROC_TAMA,470,daTama_c,d_a_tama.cpp,False
+PROC,472,daObjCorrect,unmapped.cpp,True
 PROC_WATER_MARK,474,dWaterMark_c,unmapped.cpp,True
+PROC_Tag_Attention,476,daTagAttention_c,unmapped.cpp,True
 PROC_ARROW,478,daArrow_c,d_a_arrow.cpp,False
 PROC_ARROW_ICEEFF,479,daArrow_Iceeff_c,d_a_arrow_iceeff.cpp,False
 PROC_ARROW_LIGHTEFF,480,daArrow_Lighteff_c,d_a_arrow_lighteff.cpp,False
@@ -329,8 +335,8 @@ PROC_KYEFF,484,fopAc_ac_c,unmapped.cpp,True
 PROC_KYEFF2,485,fopAc_ac_c,unmapped.cpp,True
 PROC_MESG,486,fopAc_ac_c,unmapped.cpp,True
 PROC_MSG,487,sub_msg_class,d_a_msw.cpp,True
-PROC_MSG2,488,daTag_Msg_c,unmapped.cpp,True
-PROC_MSG3,489,daTag_Msg_c,unmapped.cpp,True
+PROC_MSG2,488,sub_msg_class,unmapped.cpp,True
+PROC_MSG3,489,sub_msg_class,unmapped.cpp,True
 PROC_MENUWINDOW,490,sub_ms_screen_class,unmapped.cpp,True
 PROC_TIMER,492,fopAc_ac_c,unmapped.cpp,True
 PROC_AUCTION_SCREEN,493,fopAc_ac_c,unmapped.cpp,True

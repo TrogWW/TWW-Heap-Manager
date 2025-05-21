@@ -12,13 +12,41 @@ namespace TWWHeapVisualizer.FormElements
         private UsedMemoryBlock _block;
         private Timer _timer;
 
+
+        public MemoryDataForm(Timer timer, uint address, string ghidraStructName)
+        {
+            this._timer = timer;
+            InitializeMemoryDataGridView(address, ghidraStructName);
+        }
         public MemoryDataForm(Timer timer, UsedMemoryBlock block)
         {
             this._timer = timer;
             this._block = block;
-            InitializeMemoryDataGridView();
+            InitializeMemoryDataGridViewFromBlock();
         }
-        private void InitializeMemoryDataGridView()
+        private void InitializeMemoryDataGridView(uint actorAddress, string ghidraStructName)
+        {
+            this.Size = new Size(1200, 400);
+            IDataType datatype = ActorData.Instance.DataTypes[ghidraStructName];
+            if (datatype is StructureType structData)
+            {
+                memoryDataGridView = new MemoryDataGridView(_timer, actorAddress, structData);
+            }
+            else if(datatype is ArrayType arrayType)
+            {
+                StructureType structureType = new StructureType();
+                structureType.AddProperty("Array", arrayType, 0, arrayType.Size);
+                memoryDataGridView = new MemoryDataGridView(_timer, actorAddress, structureType);
+            }
+            else
+            {
+                throw new Exception($"Error with parsed ghidra structs. The proc name {ghidraStructName} was found to not be a structure type.");
+            }
+
+            // Add memoryDataGridView to the form's controls
+            Controls.Add(memoryDataGridView);
+        }
+        private void InitializeMemoryDataGridViewFromBlock()
         {
 
             this.Size = new Size(1200, 400);

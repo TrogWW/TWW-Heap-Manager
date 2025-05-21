@@ -3,6 +3,10 @@ using System.Windows.Forms.VisualStyles;
 using TWWHeapVisualizer.Heap.MemoryBlocks;
 using Timer = System.Windows.Forms.Timer;
 using TWWHeapVisualizer.FormElements;
+using TWWHeapVisualizer.Heap;
+using Microsoft.VisualBasic.Devices;
+using TWWHeapVisualizer.DataStructTypes;
+using TWWHeapVisualizer.Helpers;
 
 namespace TWWHeapVisualizer
 {
@@ -543,8 +547,20 @@ namespace TWWHeapVisualizer
         }
         public void DisplayVisualizerInfo()
         {
-            this.VirtualListSize = heap.blocks.Count;
-            this.Refresh();
+            try
+            {
+                this.VirtualListSize = heap.blocks.Count;
+                
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                this.Refresh();
+            }
+
         }
         private void ShowMemoryDataGridViewForm(IMemoryBlock memoryBlock)
         {

@@ -19,6 +19,9 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public const UInt64 itemID_Offset = 0x1E;
         public const UInt64 gamePtrOffset = 0x100;
         public const UInt64 actorDataOffset = 0x10;
+        public const uint actorTypeOffset = 192 + 16;
+        public const uint ACTOR_TYPE = 152240133;
+        public const uint MIN_ACTOR_SIZE = 192 + 16;
         public byte unknownValue { get; set; }
         public byte usedOrFree { get; set; }
         public uint startAddress { get; set; }
@@ -28,12 +31,15 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public uint nextBlock { get; set; }
         public int index { get; set; }
         public ushort itemID { get; set; }
+        public uint bsPcId { get; set; }
         public fopAc_ac_c actor { get; set; }
         public ObjectName data { get; set; }
         public string relFileName { get; set; }
         public uint relPointer { get; set; }
         public uint gamePtr { get; set; }
         public bool filled { get; set; } //whether or not block won't be cleared
+        public uint actorType { get; set; } //used to determine if struct is an actor...in game, this value is 152240133
+        public string actorTypeString { get; set; }
         public UsedMemoryBlock(uint startAddress, int index)
         {
             this.index = index;
@@ -44,22 +50,29 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
             this.prevBlock = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)prevBlockOffset);
             this.nextBlock = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)nextBlockOffset);
             this.endAddress = this.startAddress + this.size;
-            if(this.size > itemID_Offset + 2)
+
+            if(this.size >= MIN_ACTOR_SIZE)
             {
-                this.itemID = Memory.ReadMemory<ushort>((ulong)startAddress + (ulong)itemID_Offset);
-            }          
-            if (ActorData.Instance.ObjectNameTable.ContainsKey(this.itemID))
-            {
-                this.data = ActorData.Instance.ObjectNameTable[this.itemID];
+                this.actorType = Memory.ReadMemory<uint>((ulong)startAddress + actorTypeOffset);
+                if (ActorData.Instance.ActorTypes.ContainsKey(this.actorType))
+                {
+                    this.actorTypeString = ActorData.Instance.ActorTypes[this.actorType];
+                    this.itemID = Memory.ReadMemory<ushort>((ulong)startAddress + (ulong)itemID_Offset);
+                    if (ActorData.Instance.ObjectNameTable.ContainsKey(this.itemID))
+                    {
+                        this.data = ActorData.Instance.ObjectNameTable[this.itemID];
+                    }
+                    else
+                    {
+                        this.data = null;
+                    }
+                    this.bsPcId = Memory.ReadMemory<uint>((ulong)startAddress + 0x10 + 4);
+                    this.gamePtr = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)gamePtrOffset);
+                }
+
             }
-            else
-            {
-                this.data = null;
-            }
-            if (this.size >= 0x94)
-            {
-                this.gamePtr = Memory.ReadMemory<uint>((ulong)startAddress + (ulong)gamePtrOffset);
-            }
+            
+
         }
         public ListViewItem GetDisplayInfo()
         {
@@ -67,6 +80,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
             lvi.SubItems[0].Text = this.index.ToString();
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.startAddress.ToString("X")));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.endAddress.ToString("X")));
+            lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.bsPcId == 0 ? "" : this.bsPcId.ToString()));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.size.ToString()));
 
             //lvi.BackColor = color;

@@ -65,7 +65,13 @@ namespace TWWHeapVisualizer.Heap
         public static UInt64 actHeapPtr = 0x803E9E10;
         public static UInt64 commandHeapPtr = 0x803E9E08;
         public static UInt64 objectNameTableAddress = 0x80365CB8; //can be overwritten in version selection menu
-        
+        public static uint g_fopAc_type = 0x803E9EB0;
+        public static uint fopMsg_MSG_TYPE = 0x803E9ED0;
+        public static uint fopKy_KANKYO_TYPE = 0x803E9EC8;
+        public static uint g_fpcBs_type = 0x803E9EE8;
+        public static uint g_fpcLf_type = 0x803E9F18;
+        public static uint g_fpcNd_type = 0x803E9F28;
+
         public static UInt64 fpcCttg_Queue = 0x80365b30; //actors to create queue...TODO
         private static readonly Lazy<ActorData> lazy =
             new Lazy<ActorData>(() => new ActorData());
@@ -74,6 +80,7 @@ namespace TWWHeapVisualizer.Heap
         public Dictionary<ushort, ProcNameEntry> ProcStructNames { get; set; }
         public Dictionary<string, int> Sizes;
         public Dictionary<string, IMemoryAccessor> DataTypes;
+        public Dictionary<uint, string> ActorTypes;
         public DynamicNameTable DynamicNameTable { get; set; }
         //public List<ObjectName> ObjectNameTable;
         public Dictionary<ushort,ObjectName> ObjectNameTable;
@@ -174,7 +181,27 @@ namespace TWWHeapVisualizer.Heap
                 }
             }
             DataTypes = GhidraStructParser.LoadDataStructs();
+            ActorTypes = GetActorTypes();
             //DynamicNameTable = new DynamicNameTable();
+        }
+        public Dictionary<uint, string> GetActorTypes()
+        {
+            Dictionary<uint, string> result = new Dictionary<uint, string>();
+            uint g_fopAc_type_value = Memory.ReadMemory<uint>(g_fopAc_type);
+            uint fopMsg_MSG_TYPE_value = Memory.ReadMemory<uint>(fopMsg_MSG_TYPE);
+            uint fopKy_KANKYO_TYPE_value = Memory.ReadMemory<uint>(fopKy_KANKYO_TYPE);
+            uint g_fpcBs_type_value = Memory.ReadMemory<uint>(g_fpcBs_type);
+            uint g_fpcLf_type_value = Memory.ReadMemory<uint>(g_fpcLf_type);
+            uint g_fpcNd_type_value = Memory.ReadMemory<uint>(g_fpcNd_type);
+
+            result[g_fopAc_type_value] = "fopAc";
+            result[fopMsg_MSG_TYPE_value] = "msg";
+            result[fopKy_KANKYO_TYPE_value] = "kankyo";
+            result[g_fpcBs_type_value] = "fpcBs";
+            result[g_fpcLf_type_value] = "fpcLf";
+            result[g_fpcNd_type_value] = "fpcNd";
+
+            return result;
         }
 
         public Dictionary<ushort, ProcNameEntry> ParseProcNamesCsv()

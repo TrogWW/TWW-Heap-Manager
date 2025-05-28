@@ -13,21 +13,21 @@ public class UnknownType : IMemoryAccessor
     public static readonly Dictionary<string, int> TypeSizes = new Dictionary<string, int>
             {
                 { "", 0 },
-                { "ulonglong", 8 },
+                { "ulonglong", 4 },
                 { "bool", 1 },
                 { "string", -1 },
                 { "ushort", 2 },
                 { "float", 4 },
-                { "long", 8 },
+                { "long", 4 },
                 { "undefined", 1 },
-                { "ulong", 8 },
+                { "ulong", 4 },
                 { "uchar", 1 },
                 { "dword", 4 },
-                { "longlong", 8 },
+                { "longlong", 4 },
                 { "wchar_t", 2 },
                 { "void", 0 },
                 { "byte", 1 },
-                { "double", 8 },
+                { "double", 4 },
                 { "undefined4", 4 },
                 { "uint", 4 },
                 { "undefined1", 1 },
@@ -84,24 +84,24 @@ public class UnknownType : IMemoryAccessor
             case "float":
                 return Memory.ReadMemory<float>(address).ToString();
             case "ulonglong":
-                return Memory.ReadMemory<ulong>(address).ToString();
+                return Memory.ReadMemory<uint>(address).ToString();
             case "string":
                 //return Memory.ReadSring(address + sizeof(int)); // Read string data after the size
                 return "";
             case "ushort":
                 return Memory.ReadMemory<ushort>(address).ToString();
             case "long":
-                return Memory.ReadMemory<long>(address).ToString();
+                return Memory.ReadMemory<uint>(address).ToString();
             case "undefined":
                 return Memory.ReadMemory<byte>(address).ToString(); // Assuming undefined is byte-sized
             case "ulong":
-                return Memory.ReadMemory<ulong>(address).ToString();
+                return Memory.ReadMemory<uint>(address).ToString();
             case "uchar":
                 return Memory.ReadMemory<byte>(address).ToString();
             case "dword":
                 return Memory.ReadMemory<uint>(address).ToString(); // Assuming dword is uint
             case "longlong":
-                return Memory.ReadMemory<long>(address).ToString(); // Assuming longlong is long
+                return Memory.ReadMemory<uint>(address).ToString(); // Assuming longlong is long
             case "wchar_t":
                 return Memory.ReadMemory<char>(address).ToString(); // Assuming wchar_t is char
             case "void":
@@ -161,15 +161,15 @@ public class UnknownType : IMemoryAccessor
                 break;
             case "ulonglong":
             case "long":
-                if (long.TryParse(value, out long longValue))
+                if (uint.TryParse(value, out uint longValue))
                 {
-                    Memory.WriteMemory<long>(address, longValue);
+                    Memory.WriteMemory<uint>(address, longValue);
                 }
                 break; 
             case "ulong":
-                if (ulong.TryParse(value, out ulong ulongValue))
+                if (uint.TryParse(value, out uint ulongValue))
                 {
-                    Memory.WriteMemory<ulong>(address, ulongValue);
+                    Memory.WriteMemory<uint>(address, ulongValue);
                 }
                 break;
             case "undefined":
@@ -186,9 +186,9 @@ public class UnknownType : IMemoryAccessor
                 }
                 break;
             case "longlong":
-                if (long.TryParse(value, out longValue))
+                if (uint.TryParse(value, out uint longlongValue))
                 {
-                    Memory.WriteMemory<long>(address, longValue);
+                    Memory.WriteMemory<uint>(address, longlongValue);
                 }
                 break;
             case "wchar_t":

@@ -169,6 +169,7 @@ PROC_RACEITEM,260,daRaceItem_c,d_a_race_item.cpp,False
 PROC_DEKU_ITEM,262,daDekuItem_c,d_a_deku_item.cpp,True
 PROC_SPC_ITEM01,263,daSpcItem01_c,d_a_spc_item01.cpp,False
 PROC_Obj_Paper,264,daObjPaper,unmapped.cpp,False
+PROC_Obj_Doguu,267,daObjDoguu_c,unmapped.cpp,True
 PROC_TBOX,294,daTbox_c,d_a_tbox.cpp,False
 PROC_SBOX,295,daSbox_c,d_a_sbox.cpp,True
 PROC_BOMB,296,daBomb_c,d_a_bomb.cpp,True
@@ -344,7 +345,7 @@ PROC_PLACE_NAME,494,fopAc_ac_c,unmapped.cpp,True
 PROC_MINIGAME_STARTER,495,fopAc_ac_c,unmapped.cpp,True
 PROC_MINIGAME_TERMINATER,496,fopAc_ac_c,unmapped.cpp,True
 PROC_METER,497,sub_meter_class,unmapped.cpp,True
-PROC_OPERATE_WIND,498,fopAc_ac_c,unmapped.cpp,True
+PROC_OPERATE_WIND,498,dOw_c,unmapped.cpp,True
 PROC_SCP,499,fopAc_ac_c,unmapped.cpp,True
 PROC_PB,500,bb_class,d_a_bb.cpp,True
 PROC_GAMEOVER,501,dGameover_c,unmapped.cpp,True

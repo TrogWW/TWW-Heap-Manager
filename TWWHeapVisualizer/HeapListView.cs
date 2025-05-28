@@ -29,7 +29,7 @@ namespace TWWHeapVisualizer
             string textX = GetTextValue(x);
             string textY = GetTextValue(y);
             // Parse numeric values for specific columns
-            if (columnToSort == 0 || columnToSort == 3) // Assuming column 0 and 3 should be sorted numerically
+            if (columnToSort == 0 || columnToSort == 3 || columnToSort == 4) // Assuming column 0, 3, and 4 should be sorted numerically
             {
                 int valueX, valueY;
                 if (!int.TryParse(textX, out valueX))
@@ -58,7 +58,7 @@ namespace TWWHeapVisualizer
                 int result = String.Compare(textX.ToLower(), textY.ToLower());
 
                 // If the primary comparison is a tie, compare by startAddress
-                if (result == 0 && columnToSort != 1 && columnToSort != 2) // Assuming 1 and 2 are startAddress and endAddress columns
+                if (result == 0 && columnToSort != 1 && columnToSort != 2 && columnToSort != 3) // Assuming 1 and 2 are startAddress and endAddress columns
                 {
                     // Compare by startAddress if the primary comparison is a tie
                     result = x.startAddress.CompareTo(y.startAddress);
@@ -98,11 +98,13 @@ namespace TWWHeapVisualizer
                     return block.startAddress.ToString("X"); // Format as hexadecimal
                 case 2: // End Address column
                     return block.endAddress.ToString("X"); // Format as hexadecimal
-                case 3: // Size column
+                case 3: // BsPcId
+                    return block.bsPcId.ToString();
+                case 4: // Size column
                     return block.size.ToString();
-                case 4: // Status column
+                case 5: // Status column
                     return "Used";
-                case 5: // Data column
+                case 6: // Data column
                     return block.data?.ToString() ?? "";
                 default:
                     return ""; // Default to empty string
@@ -119,11 +121,13 @@ namespace TWWHeapVisualizer
                     return block.startAddress.ToString("X"); // Format as hexadecimal
                 case 2: // End Address column
                     return block.endAddress.ToString("X"); // Format as hexadecimal
-                case 3: // Size column
+                case 3:
+                    return "";
+                case 4: // Size column
                     return block.size.ToString();
-                case 4: // Status column
+                case 5: // Status column
                     return "Free";
-                case 5: // Data column
+                case 6: // Data column
                     return "";
                 default:
                     return ""; // Default to empty string
@@ -170,10 +174,13 @@ namespace TWWHeapVisualizer
             this.Columns.Add("Index", 50, HorizontalAlignment.Left);
             this.Columns.Add("Start Address", 100, HorizontalAlignment.Left);
             this.Columns.Add("End Address", 100, HorizontalAlignment.Left);
+            this.Columns.Add("BsPcId", 150, HorizontalAlignment.Left);
             this.Columns.Add("Size", 80, HorizontalAlignment.Left);
             this.Columns.Add("Status", 80, HorizontalAlignment.Left);
+
             //this.Columns.Add("Rel Pointer", 150, HorizontalAlignment.Left);
             this.Columns.Add("Data", 150, HorizontalAlignment.Left);
+
             this.Columns.Add("", 100, HorizontalAlignment.Left);
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 using TWWHeapVisualizer.Dolphin;
@@ -307,6 +308,12 @@ namespace TWWHeapVisualizer
                     ActorData.actHeapPtr = 0x803F6938;
                     ActorData.commandHeapPtr = 0x803F6930;
                     ActorData.objectNameTableAddress = 0x80372818;
+                    ActorData.g_fopAc_type = 0x803f69d0;
+                    ActorData.fopMsg_MSG_TYPE = 0x803f69f0;
+                    ActorData.fopKy_KANKYO_TYPE = 0x803f69e8;
+                    ActorData.g_fpcBs_type = 0x803f6a18;
+                    ActorData.g_fpcLf_type = 0x803f6a48;
+                    ActorData.g_fpcNd_type = 0x803f6a58;
 
                     DynamicModuleControl.StartAddress = 0x803B9218;
                     DynamicNameTable.StartAddress = 0x803398D8;
@@ -322,7 +329,12 @@ namespace TWWHeapVisualizer
                     ActorData.actHeapPtr = 0x803E9E10;
                     ActorData.commandHeapPtr = 0x803E9E08;
                     ActorData.objectNameTableAddress = 0x80365CB8;
-
+                    ActorData.g_fopAc_type = 0x803E9EB0;
+                    ActorData.fopMsg_MSG_TYPE = 0x803E9ED0;
+                    ActorData.fopKy_KANKYO_TYPE = 0x803E9EC8;
+                    ActorData.g_fpcBs_type = 0x803E9EE8;
+                    ActorData.g_fpcLf_type = 0x803E9F18;
+                    ActorData.g_fpcNd_type = 0x803E9F28;
                     DynamicModuleControl.StartAddress = 0;
                     DynamicNameTable.StartAddress = 0;
                     ActorData.Instance.InitializeData();

@@ -29,6 +29,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
             lvi.SubItems[0].Text = "";
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.startAddress.ToString("X")));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.endAddress.ToString("X")));
+            lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, this.size.ToString()));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, "Free"));
             lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, ""));

@@ -19,8 +19,8 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public const UInt64 itemID_Offset = 0x1E;
         public const UInt64 gamePtrOffset = 0x100;
         public const UInt64 actorDataOffset = 0x10;
+
         public const uint actorTypeOffset = 192 + 16;
-        public const uint ACTOR_TYPE = 152240133;
         public const uint MIN_ACTOR_SIZE = 192 + 16;
         public byte unknownValue { get; set; }
         public byte usedOrFree { get; set; }
@@ -31,6 +31,7 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
         public uint nextBlock { get; set; }
         public int index { get; set; }
         public ushort itemID { get; set; }
+        public uint bsPcType { get; set; }
         public uint bsPcId { get; set; }
         public fopAc_ac_c actor { get; set; }
         public ObjectName data { get; set; }
@@ -53,10 +54,25 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
 
             if(this.size >= MIN_ACTOR_SIZE)
             {
+                this.bsPcType = Memory.ReadMemory<uint>((ulong)startAddress + actorDataOffset);
                 this.actorType = Memory.ReadMemory<uint>((ulong)startAddress + actorTypeOffset);
-                if (ActorData.Instance.ActorTypes.ContainsKey(this.actorType))
+
+                uint? actorTypeId = null;
+                if (ActorData.Instance.ActorTypes.ContainsKey(this.bsPcType))
                 {
-                    this.actorTypeString = ActorData.Instance.ActorTypes[this.actorType];
+                    actorTypeId = this.bsPcType;
+                }
+                else if (ActorData.Instance.ActorTypes.ContainsKey(this.actorType))
+                {
+                    actorTypeId = this.actorType;
+                }
+                if (actorTypeId != null)
+                {
+                    if (this.bsPcType != this.actorType)
+                    {
+                        var test2 = 5;
+                    }
+                    this.actorTypeString = ActorData.Instance.ActorTypes[actorTypeId.Value];
                     this.itemID = Memory.ReadMemory<ushort>((ulong)startAddress + (ulong)itemID_Offset);
                     if (ActorData.Instance.ObjectNameTable.ContainsKey(this.itemID))
                     {

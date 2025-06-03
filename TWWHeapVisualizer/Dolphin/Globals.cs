@@ -17,6 +17,8 @@ namespace TWWHeapVisualizer.Dolphin
         public static uint g_dComIfG_gameInfo = 0x803b8108; //0x803c4c08;
         [Class("dStage_roomStatus_c[64]")]
         public static uint dStage_roomControl_c__mStatus = 0x803b1188; //803bdc88
+        [Class("J2DScreen *")]
+        public static uint dMsg_sScreen = 0x803EA648;
         public static void PopulateGlobalsMenu(ToolStripMenuItem parent, Timer timer)
         {
             _timer = timer; 

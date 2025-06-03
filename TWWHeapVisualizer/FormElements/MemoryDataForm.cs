@@ -38,6 +38,12 @@ namespace TWWHeapVisualizer.FormElements
                 structureType.AddProperty("Array", arrayType, 0, arrayType.Size);
                 memoryDataGridView = new MemoryDataGridView(_timer, actorAddress, structureType);
             }
+            else if(datatype is PointerType pointerType)
+            {
+                StructureType structureType = new StructureType();
+                structureType.AddProperty("pointer", pointerType, 0, pointerType.Size);
+                memoryDataGridView = new MemoryDataGridView(_timer, actorAddress, structureType);
+            }
             else
             {
                 throw new Exception($"Error with parsed ghidra structs. The proc name {ghidraStructName} was found to not be a structure type.");

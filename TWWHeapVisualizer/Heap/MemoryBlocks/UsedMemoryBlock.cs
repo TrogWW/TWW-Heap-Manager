@@ -68,10 +68,6 @@ namespace TWWHeapVisualizer.Heap.MemoryBlocks
                 }
                 if (actorTypeId != null)
                 {
-                    if (this.bsPcType != this.actorType)
-                    {
-                        var test2 = 5;
-                    }
                     this.actorTypeString = ActorData.Instance.ActorTypes[actorTypeId.Value];
                     this.itemID = Memory.ReadMemory<ushort>((ulong)startAddress + (ulong)itemID_Offset);
                     if (ActorData.Instance.ObjectNameTable.ContainsKey(this.itemID))

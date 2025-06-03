@@ -62,6 +62,7 @@ namespace TWWHeapVisualizer.Heap
         public static UInt64 fopActQueueHead = 0x803654CC;  //can be overwritten in version selection menu     
         public static UInt64 zeldaHeapPtr = 0x803E9E00; //can be overwritten in version selection menu
         public static UInt64 gameHeapPtr = 0x803E9DF8;
+        public static UInt64 fopMsgHeapPtr = 0x803BDD18;
         public static UInt64 actHeapPtr = 0x803E9E10;
         public static UInt64 commandHeapPtr = 0x803E9E08;
         public static UInt64 objectNameTableAddress = 0x80365CB8; //can be overwritten in version selection menu

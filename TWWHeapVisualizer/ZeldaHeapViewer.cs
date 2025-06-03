@@ -23,6 +23,7 @@ namespace TWWHeapVisualizer
         private HeapBarForm zeldaHeapVisualizerForm;
         private HeapBarForm actHeapVisualizerForm;
         private HeapBarForm gameHeapVisualizerForm;
+        private HeapBarForm fopMsgHeapVisualizerForm;
         private HeapBarForm commandHeapVisualizerForm;
         private MenuStrip menuStrip;
         private Panel mainPanel;
@@ -33,6 +34,7 @@ namespace TWWHeapVisualizer
         private ZeldaBlockCollection zeldaHeap;
         MemoryBlockCollection actHeap;
         MemoryBlockCollection gameHeap;
+        MemoryBlockCollection fopMsgHeap;
         MemoryBlockCollection commandHeap;
         // Constructor
         public ZeldaHeapViewer()
@@ -138,6 +140,15 @@ namespace TWWHeapVisualizer
 
             markUsedAsFilled.Click += MarkUsedAsFilled_Click;
             markUsedAsCleared.Click += MarkUsedAsCleared_Click;
+
+            // Create a secondary menu with NTSC-U and JP options
+            ContextMenuStrip gameHeapSecondaryMenu = new ContextMenuStrip();
+            ToolStripMenuItem fopMsgHeap = new ToolStripMenuItem("FopMsg");
+            fopMsgHeap.Click += ViewFopMsgHeap_Click;
+
+            gameHeapSecondaryMenu.Items.Add(fopMsgHeap);
+            viewGameHeap.DropDown = gameHeapSecondaryMenu;
+            
             // Create a secondary menu with NTSC-U and JP options
             ContextMenuStrip secondaryMenu = new ContextMenuStrip();
 
@@ -203,6 +214,23 @@ namespace TWWHeapVisualizer
         {
             gameHeap.UpdateBlocks();
         }
+        private void ViewFopMsgHeap_Click(object? sender, EventArgs e)
+        {
+            fopMsgHeap = new MemoryBlockCollection((uint)ActorData.fopMsgHeapPtr);
+            addressLoopTimer.Tick += FopMsgHeap_Tick;
+            fopMsgHeapVisualizerForm = new HeapBarForm(fopMsgHeap, "FopMsg Heap");
+            fopMsgHeapVisualizerForm.FormClosed += FopMsgHeap_Closed;
+            fopMsgHeapVisualizerForm.Show();
+        }
+        private void FopMsgHeap_Closed(object? sender, FormClosedEventArgs e)
+        {
+            addressLoopTimer.Tick -= FopMsgHeap_Tick;
+        }
+        private void FopMsgHeap_Tick(object? sender, EventArgs e)
+        {
+            fopMsgHeap.UpdateBlocks();
+        }
+
         private void ViewArchiveHeap_Click(object? sender, EventArgs e)
         {
             actHeap = new MemoryBlockCollection((uint)ActorData.actHeapPtr);
@@ -305,6 +333,7 @@ namespace TWWHeapVisualizer
                     ActorData.fopActQueueHead = 0x80372028;
                     ActorData.zeldaHeapPtr = 0x803F6928;
                     ActorData.gameHeapPtr = 0x803F6920;
+                    ActorData.fopMsgHeapPtr = 0x803CA824;
                     ActorData.actHeapPtr = 0x803F6938;
                     ActorData.commandHeapPtr = 0x803F6930;
                     ActorData.objectNameTableAddress = 0x80372818;
@@ -326,6 +355,7 @@ namespace TWWHeapVisualizer
                     ActorData.fopActQueueHead = 0x803654CC;
                     ActorData.zeldaHeapPtr = 0x803E9E00;
                     ActorData.gameHeapPtr = 0x803E9DF8;
+                    ActorData.fopMsgHeapPtr = 0x803BDD18;
                     ActorData.actHeapPtr = 0x803E9E10;
                     ActorData.commandHeapPtr = 0x803E9E08;
                     ActorData.objectNameTableAddress = 0x80365CB8;
@@ -369,6 +399,10 @@ namespace TWWHeapVisualizer
             if (gameHeap != null)
             {
                 gameHeap.ClearFilledMemory();
+            }
+            if (fopMsgHeap != null)
+            {
+                fopMsgHeap.ClearFilledMemory();
             }
             if (commandHeap != null)
             {

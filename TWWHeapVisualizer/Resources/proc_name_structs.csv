@@ -347,7 +347,7 @@ PROC_MINIGAME_TERMINATER,496,fopAc_ac_c,unmapped.cpp,True
 PROC_METER,497,sub_meter_class,unmapped.cpp,True
 PROC_OPERATE_WIND,498,dOw_c,unmapped.cpp,True
 PROC_SCP,499,fopAc_ac_c,unmapped.cpp,True
-PROC_PB,500,bb_class,d_a_bb.cpp,True
+PROC_PB,500,daObj_Pbco_c,d_a_bb.cpp,True
 PROC_GAMEOVER,501,dGameover_c,unmapped.cpp,True
 PROC_FallRock,425,daFallRock_c,unmapped.cpp,True
 PROC_TagRock,424,daFallRockTag_c,unmapped.cpp,True
